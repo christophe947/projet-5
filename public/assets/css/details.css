@@ -1,0 +1,102 @@
+        /* PAGE PROFIL PERSONNE:::: */
+
+
+/* LARGEUR BLOCK PAGE: MENU_PAGE ET CENTRE_PAGE:: */
+
+#blockPage {
+    width: 100%;
+}
+#blockLeft {
+    width: 16.5%;
+    max-width: 24.75em;
+}
+#blockCenter {
+    width: 83.5%;
+    margin-left: 16.5%; /* afin de fixed le block gauche */
+    background: linear-gradient(90deg, rgb( 231, 231, 231, 0.65) 0%, rgba( 231, 231, 231, 0.50) 1%, rgba( 231, 231, 231, 0.25) 2%, rgba(231, 231, 231, 0.25) 3%, rgba(255, 255, 255, 0.15) 5%, rgba(255, 255, 255, 0.0) 15%, rgba(255, 255, 255, 0.0) 100%) !important;
+}
+
+/* HAUTEUR BLOCK PAGE: MENU_PAGE ET CENTRE_PAGE:: */
+
+#page {
+    height: 100vh;
+    width: 100% !important;
+    max-width: 2400px;
+    margin: auto;
+}
+
+/* MENU:: */
+
+#leftMenu {
+    line-height: 2.25em !important;
+    width: 100% !important;
+}
+.menuProfil:hover {
+    color: rgba(245, 174, 36, 1);
+    border-bottom-color: rgba(245, 174, 36, 1) !important;
+}
+.leftMenu:hover {
+    color: rgba(245, 174, 36, 1);
+    background-color: rgba(254, 249, 239, 1);
+}
+.leftMenu {
+    padding: 0.85em;
+    padding-left: 15%;
+}
+.titleMenu {
+    padding-left: 15%;
+}
+
+/* LOGO APPLI:: */
+
+#logoApp {
+    height: 3em;
+}
+
+/* PHOTO DE COUVERTURE DIV:: */
+
+#cover {
+    max-height: 10em !important;
+    width: 100%;
+}
+#cover img {
+    margin-top: -35%;
+    width: 100%;
+}
+
+/* PHOTO DE PROFIL DIV::  */
+
+#pictureProfil {
+    background-color: rgba( 160, 160, 160, 1);
+    width: 8em;
+    height: 8em;
+    margin-top: -5em;
+}
+#pictureProfil img {
+    width: 100%;
+}
+
+/* INFO HAUT DROITE:: */
+
+#partRightRow {
+    min-width: 30%;
+}
+.pastille {
+    height: 1.5em;  
+    border-radius: 35px; 
+}
+#pastilleAddHover:hover {
+    background-color: rgba(83, 110, 55, 0.493);
+    cursor: pointer;
+}
+
+/* NAV PROFIL CENTER:: */
+
+#navProfil {
+    
+    width: 40em;
+    max-width: 95%;
+    
+}
+
+        /* FIN PAGE PROFIL PERSONNE:::: */

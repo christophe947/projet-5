@@ -1,0 +1,88 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+<div id="page" class="flex flexRow">
+    <div id="blockLeft" class="fixed textAlignCenter borderRight borderLight borderColorLightGrey">
+        <div id="logoApp" class="flex justifyCenter alignItemCenter">
+            <a href="#">MyApp</a>
+        </div>
+        <br>
+        <hr>
+        <div class=>
+            <nav class="textAlignStart">
+                <h2 class="titleMenu fontSize3 color1 fontProject maj">Menu</h2>
+
+                <ul id="leftMenu" class="fontProject flex flexColumn">
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-earth-americas"></i>&nbsp &nbsp Decouvrir</a></li>
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-magnifying-glass"></i>&nbsp &nbsp Rechercher</a></li>
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-users-line"></i>&nbsp &nbsp Mes amis</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div>
+            <nav class="textAlignStart">
+                <h2 class="titleMenu fontSize3 color1 fontProject maj">Vos information</h2>
+
+                <ul id="leftMenu" class="fontProject flex flexColumn">
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color3"><i class="fa-solid fa-user"></i>&nbsp Mon profil</a></li>
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-chart-line"></i>&nbsp Mon Dashboard</a></li>
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-envelope"></i>&nbsp Messages</a></li>
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-gear"></i>&nbsp Parametres</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div id="blockCenter">
+        <div id="cover" class="overflowHidden">
+            <img id="imageCouverture" src="{{ asset('assets/images/nature_river_sunlight_water-103075.jpg') }}">
+        </div>
+        <div id="spaceProfil">
+            <div id="rowTop" class="flex flexRow justifyBetween marginBottom1">
+                <div class="flex flexRow">
+                    <div id="pictureProfil" class="border borderMiddle borderColorWhite borderRadius1 marginLeft3 relative overflowHidden marginRight2">
+                        <img id="imageCouverture" src="{{ asset('assets/images/no-profile-picture-icon-7.png') }}">
+                    </div>
+                    <h2 class="fontSize4 fontProject color3">Name Firstname</h2>
+                </div>
+                <div id="partRightRow" class="fontProject marginTop1 paddingRight1 flex flexRow justifyAround">
+                    <div class="pastille marginAuto flex alignItemCenter border borderSmall borderColorLightGrey borderRadius1 padding05 paddingLeft1 paddingRight1 color4">
+                        <p>Amateur</p>
+                    </div>
+                    <div class="pastille marginAuto flex alignItemCenter border borderSmall borderColorLightGrey borderRadius1 padding05 paddingLeft1 paddingRight1 color4">
+                        <p>50 amis</p>
+                    </div>
+                    <div id="pastilleAddHover" class="pastille backColorProject1 marginAuto flex alignItemCenter border borderSmall borderColorProject1 borderRadius1 padding05 paddingLeft1 paddingRight1 colorWhite">
+                        <a><i class="fa-solid fa-plus"></i>&nbsp Demande d'ami</a>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <nav class="color1 paddingLeft1">
+                    <ul id="navProfil" class="maj fontSize3 fontProject flex justifyAround">
+                        <li><a href="{{ path('user.profil') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">Profil</a></li>
+                        <li><a href="{{ path('user.media') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">Media</a></li>
+                        <li><a href="{{ path('user.event') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">Evenement</a></li>
+                        <li><a href="{{ path('user.info') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">A propos</a></li>
+                        <li><a href="{{ path('user.contact') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">Contacter</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <hr>
+            <div>
+                {% block titleProfil %}
+                    Profil Title
+                {% endblock %}
+
+                {% block Profil %}
+                    Profil Body
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
