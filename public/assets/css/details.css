@@ -31,10 +31,6 @@
     line-height: 2.25em !important;
     width: 100% !important;
 }
-.menuProfil:hover {
-    color: rgba(245, 174, 36, 1);
-    border-bottom-color: rgba(245, 174, 36, 1) !important;
-}
 .leftMenu:hover {
     color: rgba(245, 174, 36, 1);
     background-color: rgba(254, 249, 239, 1);
@@ -43,6 +39,13 @@
     padding: 0.85em;
     padding-left: 15%;
 }
+.menuProfil:hover {
+    color: rgba(245, 174, 36, 1);
+}
+.menuProfilSelected {
+    color: rgba(245, 174, 36, 1);
+    border-bottom-color: rgba(245, 174, 36, 1) !important;
+}
 .titleMenu {
     padding-left: 15%;
 }
@@ -50,7 +53,14 @@
 /* LOGO APPLI:: */
 
 #logoApp {
-    height: 3em;
+    height: 7.5em;
+    overflow: hidden;
+}
+#logo {
+    max-height: 11em !important;
+    width: 85% !important;
+    margin-left: 0%;
+    margin-right: 15%;
 }
 
 /* PHOTO DE COUVERTURE DIV:: */
@@ -60,7 +70,7 @@
     width: 100%;
 }
 #cover img {
-    margin-top: -35%;
+    margin-top: -7%;
     width: 100%;
 }
 
@@ -100,3 +110,17 @@
 }
 
         /* FIN PAGE PROFIL PERSONNE:::: */
+
+        /* PAGE DE LOGIN:::: */
+
+.login {
+    margin-top: -10em !important;
+}
+.inputConnectEmail {
+    width: 20em;
+}
+.inputConnectPassword {
+    width: 20em;
+}
+
+        /* FIN PZGE LOGIN */

@@ -15,12 +15,6 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig', []);
     }
 
-    #[Route(path: '/login', name: 'login')]     //emplacement provisoire pour permetre la vue
-    public function login()//: Response
-    {
-        return $this->render('main/login.html.twig');
-    }
-
     #[Route('/register', name: 'register')]     //emplacement provisoire pour permetre la vue
     public function register()//: Response
     {
