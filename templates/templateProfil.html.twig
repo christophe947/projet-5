@@ -7,12 +7,13 @@
 {% block body %}
 <div id="page" class="flex flexRow">
     <div id="blockLeft" class="fixed textAlignCenter borderRight borderLight borderColorLightGrey">
-        <div id="logoApp" class="flex justifyCenter alignItemCenter">
-            <a href="#">MyApp</a>
+        <div id="logoApp" class="flex alignItemCenter"><!--justifyCenter -->
+            <a href="#">
+                <img id="logo" class="flex relative" src="{{ asset('assets/images/Hand-drawn-trumpet-logo-by-yahyaanasatokillah-580x387.jpg') }}">
+            </a>
         </div>
-        <br>
         <hr>
-        <div class=>
+        <div class="marginTop2">
             <nav class="textAlignStart">
                 <h2 class="titleMenu fontSize3 color1 fontProject maj">Menu</h2>
 
@@ -39,7 +40,7 @@
 
     <div id="blockCenter">
         <div id="cover" class="overflowHidden">
-            <img id="imageCouverture" src="{{ asset('assets/images/nature_river_sunlight_water-103075.jpg') }}">
+            <img id="imageCouverture" src="{{ asset('assets/images/Sky_Stars_Night_468639_1920x1080.jpg') }}">
         </div>
         <div id="spaceProfil">
             <div id="rowTop" class="flex flexRow justifyBetween marginBottom1">
@@ -64,11 +65,11 @@
             <div class="">
                 <nav class="color1 paddingLeft1">
                     <ul id="navProfil" class="maj fontSize3 fontProject flex justifyAround">
-                        <li><a href="{{ path('user.profil') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">Profil</a></li>
-                        <li><a href="{{ path('user.media') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">Media</a></li>
-                        <li><a href="{{ path('user.event') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">Evenement</a></li>
-                        <li><a href="{{ path('user.info') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">A propos</a></li>
-                        <li><a href="{{ path('user.contact') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil">Contacter</a></li>
+                        <li><a href="{{ path('user.profil') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedProfil is defined %} {{ classSelectedProfil }} {% endif %}">Profil</a></li>
+                        <li><a href="{{ path('user.media') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedMedia is defined %} {{ classSelectedMedia }} {% endif %}">Media</a></li>
+                        <li><a href="{{ path('user.event') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedEvent is defined %} {{ classSelectedEvent }} {% endif %}">Evenement</a></li>
+                        <li><a href="{{ path('user.info') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedInfo is defined %} {{ classSelectedInfo }} {% endif %}">A propos</a></li>
+                        <li><a href="{{ path('user.contact') }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedContact is defined %} {{ classSelectedContact }} {% endif %}">Contacter</a></li>
                     </ul>
                 </nav>
             </div>

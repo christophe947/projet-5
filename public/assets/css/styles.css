@@ -304,14 +304,26 @@ ul {
 .marginLeft1 {
     margin-left: 1em;
 }
+.marginLeft-1 {
+    margin-left: -1em;
+}
 .marginLeft2 {
     margin-left: 2em;
+}
+.marginLeft-2 {
+    margin-left: -2em;
 }
 .marginLeft3 {
     margin-left: 3em;
 }
+.marginLeft-3 {
+    margin-left: -3em;
+}
 .marginLeft5 {
     margin-left: 5em;
+}
+.marginLeft-5 {
+    margin-left: -5em;
 }
 .marginLeft10 {
     margin-Left: 10em;
