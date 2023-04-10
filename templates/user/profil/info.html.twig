@@ -7,5 +7,10 @@
 {% endblock %}
     
 {% block Profil %}
+    {% if user.id == auth.id  %} {# je suis sur mon profil perso #}    {# form completedProfilForm #}
+        moi
+    {% else %} {# je suis sur le profil d'un user !== moi #} 
+        Anonymous
+    {% endif %}
         
 {% endblock %}

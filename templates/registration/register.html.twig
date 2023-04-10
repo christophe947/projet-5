@@ -1,0 +1,106 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+    <div id="page" class="register flex flexColumn textAlignCenter alignItemCenter justifyCenter">
+        <div id="loginPortal" class="flex flexColumn textAlignCenter alignItemCenter justifyCenter paddingTop1 paddingBottom2 marginBottom2 borderRadius02 backColorWhite09">
+            <h1 class="fontProject color1 fontSize65 marginBottom1">My App</h1>
+
+            <p class="fontProject colorLightGrey2">Inscrivez-vous pour profiter pleinement</p>
+
+            <button class="registerButton1 marginAuto fontProject fontSize3 marginBottom1 border borderLight borderRadius03 backColorProject2 borderColorProject2">
+                <a href="{{ path('register_google') }}" class="flex justifyCenter fontProject colorWhite fontSize3"><img id="logoGoogle" src="{{ asset('assets/images/google_logo_rond.png') }}"><p class="">&nbsp S'inscrire avec Google</p></a>
+            </button>
+
+            <div id="formRegister" class="flex flexColumn textAlignCenter alignItemCenter justifyCenter">
+                {{ form_start(registrationForm) }}
+                    <div class="flex marginBottom1">
+                        <label class="fontProject color1 fontSize3">
+                            {{ form_label(registrationForm.email) }}
+                        </label>
+                        <div class="">
+                            {{ form_widget(registrationForm.email,  {'attr': {'class': 'input2 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}} ) }} 
+                        </div>
+                        <div class="fontProject color31">
+                            {{ form_errors(registrationForm.email) }}
+                        </div>
+                    </div>
+
+                    <div class="flex marginBottom1">
+                        <label class="fontProject color1 fontSize3">
+                            {{ form_label(registrationForm.plainPassword) }}
+                        </label>
+                        <div class="">
+                            {{ form_widget(registrationForm.plainPassword,  {'attr': {'class': 'input2 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02'}}) }}
+                        </div>
+                        <div class="fontProject color31">
+                            {{ form_errors(registrationForm.plainPassword) }}
+                        </div>
+                    </div>
+
+                    <div class="flex marginBottom1">
+                        <label class="fontProject color1 fontSize3">
+                            {{ form_label(registrationForm.name) }}
+                        </label>
+                        <div class="">
+                            {{ form_widget(registrationForm.name, {'attr': {'class': 'input2 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}}) }}
+                        </div>
+                        <div class="fontProject color31">
+                            {{ form_errors(registrationForm.name) }}
+                        </div>
+                    </div>
+
+                    <div class="flex marginBottom1">
+                        <label class="fontProject color1 fontSize3">
+                            {{ form_label(registrationForm.firstname) }}
+                        </label>
+                        <div class="">
+                            {{ form_widget(registrationForm.firstname, {'attr': {'class': 'input2 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}}) }}
+                        </div>
+                        <div class="fontProject color31">
+                            {{ form_errors(registrationForm.firstname) }}
+                        </div>
+                    </div>
+
+                    <div class="flex marginBottom1">
+                        <label class="fontProject color1 fontSize3">
+                            {{ form_label(registrationForm.birthday) }}
+                        </label>
+                        <div class="">
+                            {{ form_widget(registrationForm.birthday) }}
+                        </div>
+                        <div class="fontProject color31">
+                            {{ form_errors(registrationForm.birthday) }}
+                        </div>
+                    </div>
+
+                    <div class="marginBottom1">
+                        <label class="fontProject colorLightGrey2 fontSize3">
+                            {{ form_label(registrationForm.agreeTerms) }}
+                        </label>
+                        <div class="">
+                            {{ form_widget(registrationForm.agreeTerms) }}
+                        </div>
+                        <div class="fontProject color31">
+                            {{ form_errors(registrationForm.agreeTerms) }}
+                        </div>
+                    </div>
+                    
+                    <div class="">
+                        {{ form_row(registrationForm.valider, {'attr': {'class': 'registerButton2 fontProject fontSize3 padding025 colorWhite marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2'}}) }}
+                    </div>
+                    
+                    <!--<button type="submit" class="">Valider</button>-->
+                    
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+        <div id="loginPortal" class="flex flexColumn paddingTop2 paddingBottom2 borderRadius02 backColorWhite09">
+            <p class="fontProject color1 fontSize3">Vous avez deja un compte ?<a href="{{ path('app_login') }}">&nbsp Connectez-vous</a></p>
+        </div>
+    </div>
+{% endblock %}
+

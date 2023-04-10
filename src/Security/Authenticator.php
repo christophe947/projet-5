@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 //use Symfony\Component\Security\Core\Security;
 use Symfony\Bundle\SecurityBundle\Security;
+//use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
@@ -22,13 +23,14 @@ class Authenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator, private Security $security)
     {
     }
 
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
+        //$id = $request->request->get('id', '');
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
@@ -44,16 +46,21 @@ class Authenticator extends AbstractLoginFormAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+        
             return new RedirectResponse($targetPath);
         }
-
-        // For example:
-        // return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        return new RedirectResponse($this->urlGenerator->generate('user.profil'));
+        
+        $user = $this->security->getUser();
+        $id = $user->getId();
+    
+        return new RedirectResponse($this->urlGenerator->generate('user_profil',['id' => $id]));
+        //return new RedirectResponse($this->urlGenerator->generate('app_success_login'));
     }
 
     protected function getLoginUrl(Request $request): string
     {
+        //var_dump($this->urlGenerator);die();
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
+    
 }

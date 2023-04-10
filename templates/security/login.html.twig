@@ -5,39 +5,56 @@
 {% block pageTitle %}{% endblock %}
 
 {% block body %}
-<div id="page" class="login flex textAlignCenter alignItemCenter justifyCenter">
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+<div id="page" class="login flex flexColumn textAlignCenter alignItemCenter justifyCenter">
+    
+    <div id="loginPortal" class="flex flexColumn paddingTop1 paddingBottom2 marginBottom2 borderRadius02 backColorWhite09">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div>
-        {% endif %}
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Deconnection</a>
+                </div>
+            {% endif %}
 
-        <h1 class="fontProject color1">Please sign in</h1>
+            <h1 class="fontProject color1 fontSize65 marginBottom1">My App</h1>
 
-        <p class="marginLeft-3"><label for="inputEmail">Email &nbsp</label><input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="inputConnectEmail" autocomplete="email" required autofocus></p>
-        <p class="marginLeft-5"><label for="inputPassword">Password &nbsp</label><input type="password" name="password" id="inputPassword" class="inputConnectPassword" autocomplete="current-password" required></p>
+            <p class="marginLeft-3"><label class="fontProject color1 fontSize3" for="inputEmail">Email &nbsp</label><input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31" autocomplete="email" required autofocus></p>
+            <p class="marginLeft-3"><label class="fontProject color1 fontSize3" for="inputPassword">Pass &nbsp &nbsp</label><input type="password" name="password" id="inputPassword" class="input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02" autocomplete="current-password" required></p>
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html #}
 
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
-            </div>
-        #}
+                <div>
+                    <label class="fontProject colorLightGrey2">
+                        <input id="check1" class="colorLightGrey2" type="checkbox" name="_remember_me"> Se souvenir de moi
+                    </label>
+                </div>
+                <br>
+            
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
-    </form>
+            <button id="loginButton" class="fontProject fontSize3 padding025 colorWhite marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2" type="submit">
+                Se connecter
+            </button>
+            
+        </form>
+        <div class="flex">
+            <hr class="marginRight1 marginLeft1 hrco borderBottom borderLight borderColorLightGrey"><p class="colorLightGrey2">OU</p><hr class="marginLeft1 marginRight1 hrco borderBottom borderLight borderColorLightGrey">
+        </div>
+        <div class="marginAuto">
+            <a id="linkGoogle1" href="{{ path('connect_google') }}" class="flex justifyCenter fontProject color1 fontSize3"><img id="logoGoogle" src="{{ asset('assets/images/google_logo.png') }}"><p>&nbsp Se connecter avec Google</p></a>
+        </div>
+        <div class="marginAuto">
+            <a href="" class="flex justifyCenter"><p class="link1 fontProject fontSize2 color31">Mot de passe oublié ?</p></a>
+        </div>
+    </div>
+    <div id="loginPortal" class="flex flexColumn paddingTop2 paddingBottom2 borderRadius02 backColorWhite09">
+        <p class="fontProject color1 fontSize3">Vous n’avez pas de compte ? <a class="color31 link1" href="{{ path('app_register') }}">&nbsp Inscrivez-vous</a></p>
+    </div>
 </div>
 {% endblock %}

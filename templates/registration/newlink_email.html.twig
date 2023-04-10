@@ -1,0 +1,10 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+     <p>Renvoyer un nouveau lien de confirmation d'Email : <a class="nav-link" href="{{ path('send_newlink', { id: auth.id }) }}">Cliquer-ici</a></p>    
+{% endblock %}
+    

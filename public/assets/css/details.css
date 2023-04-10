@@ -1,4 +1,108 @@
-        /* PAGE PROFIL PERSONNE:::: */
+        /* PAGE DACCUEIL:::: */
+
+
+.accueil {
+    background-image: url('../images/blue.jpg');
+    background-size: cover;
+    background-position: 50% 55%;            
+}
+.accueil h1 {
+    margin-top: -5em !important;
+    /*text-shadow: rgb(216, 212, 195) 1px 1px 20px;*/
+}
+
+#homePortal {
+    width: 20em; 
+}
+
+
+        /* FIN PAGE ACCUEIL */
+
+
+        /* PAGE DE LOGIN:::: */
+
+
+.login, .register {
+    background-image: url('../images/background_login.jpg');
+    background-size: cover;
+    background-position: 30% 15%;     
+}
+#loginPortal {
+    width: 30%;
+    box-shadow: rgb(0, 0, 0) 1px 1px 60px;
+}
+.hrco {
+    width: 90%;
+    margin-bottom: 1.5em;
+}
+#logoGoogle {
+    width: 3em;
+}
+.input1 {
+    width: 50%;
+    
+}
+#loginButton {
+    margin-left: 0.8em;
+    /*width: 15.7em;*/
+    width: 55%;
+    transition: 0.5s;
+}
+#loginButton:hover {
+    opacity: 0.95;
+    cursor: pointer;
+    box-shadow:  rgba(0, 0, 0, 0.5) 1px 1px 10px;
+    transition-duration: 0.25s;
+}
+#check1 {
+    cursor: pointer;
+    opacity: 0.75;
+}
+#linkGoogle1 {
+    transition: 0.25s;
+}
+#linkGoogle1:hover {
+    
+    padding-left: 1em;
+    padding-right: 1em;
+    border: 0px solid rgba(255, 255, 255, 0.975);
+    border-radius: 2em;
+    box-shadow:  rgba(0, 0, 0, 0.5) 1px 1px 10px;
+    transition-duration: 0.25s;
+}
+.link1 {
+    opacity: 1;
+    transition: 0.20s;
+}
+.link1:hover {
+    opacity: 0.65;
+    transition-duration: 0.25s;
+}
+
+        /* FIN PAGE LOGIN */
+
+
+        /* PAGE INSCRIPTION */
+
+#formRegister {
+   
+    width: 100% !important;
+    
+}
+.registerButton1 {
+    width: 90%;
+}
+.registerButton2 {
+    width: 90%;
+}
+.input2 {
+    width: 100%;
+}
+
+        /* FIN PAGE INSCRIPTION */
+       
+
+       /* PAGE PROFIL PERSONNE:::: */
 
 
 /* LARGEUR BLOCK PAGE: MENU_PAGE ET CENTRE_PAGE:: */
@@ -8,7 +112,7 @@
 }
 #blockLeft {
     width: 16.5%;
-    max-width: 24.75em;
+    max-width: 26.4em;
 }
 #blockCenter {
     width: 83.5%;
@@ -21,7 +125,7 @@
 #page {
     height: 100vh;
     width: 100% !important;
-    max-width: 2400px;
+    max-width: 2560px;
     margin: auto;
 }
 
@@ -67,13 +171,23 @@
 
 #cover {
     max-height: 10em !important;
-    width: 100%;
+    width: 100%;  
+   
+}
+#boxShadow {  
+    width: 100% !important;
+    height: 10em;
+    z-index: 5 !important;
+    margin-top: -10em;
+    position: relative;
+    box-shadow: -1px -13px 29px -14px rgba(0,0,0,0.75) inset !important;
 }
 #cover img {
+    z-index: -5 !important;
     margin-top: -7%;
     width: 100%;
-}
-
+ }  
+ 
 /* PHOTO DE PROFIL DIV::  */
 
 #pictureProfil {
@@ -81,10 +195,12 @@
     width: 8em;
     height: 8em;
     margin-top: -5em;
+    z-index: 10 !important;
 }
 #pictureProfil img {
-    width: 100%;
+    width: 100%; 
 }
+
 
 /* INFO HAUT DROITE:: */
 
@@ -111,16 +227,3 @@
 
         /* FIN PAGE PROFIL PERSONNE:::: */
 
-        /* PAGE DE LOGIN:::: */
-
-.login {
-    margin-top: -10em !important;
-}
-.inputConnectEmail {
-    width: 20em;
-}
-.inputConnectPassword {
-    width: 20em;
-}
-
-        /* FIN PZGE LOGIN */

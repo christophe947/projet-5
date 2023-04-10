@@ -21,7 +21,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $admin1->setRoles(['ROLE_ADMIN']);
         $admin1->setName('dupont');
         $admin1->setFirstname('jean');
-        $admin1->setAge('39');
+        $admin1->setBirthday(new \DateTime('1995-08-24'));
         $admin1->setPseudo('jeanno');
         $admin1->setStatus('1');
         $date1 = new \DateTime();
@@ -33,7 +33,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $admin2->setRoles(['ROLE_ADMIN']);
         $admin2->setName('dumont');
         $admin2->setFirstname('luc');
-        $admin2->setAge('40');
+        $admin2->setBirthday(new \DateTime('1999-08-24'));
         $admin2->setPseudo('sky');
         $admin2->setStatus('1');
         $date2 = new \DateTime();
@@ -49,7 +49,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $user->setRoles(["ROLE_USER"]);
         $user->setName("dupond");
         $user->setFirstname("martin");
-        $user->setAge("20");
+        $user->setBirthday(new \DateTime('1991-08-24'));
         $user->setPseudo("marty");
         $user->setStatus('1');
         $date3 = new \DateTime();

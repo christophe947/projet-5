@@ -37,6 +37,15 @@ ul {
     list-style-type: none;
     padding: 0;
 }
+
+/* INPUT */
+
+input:focus {
+    outline: 2px solid #00a8cd;  
+}
+input:visited {
+    outline: 2px solid orange; 
+}
                 /* FIN OPTION DE BALISE GENERAL */
 
 
@@ -104,11 +113,26 @@ ul {
     border-color:  rgba(231, 231, 231, 1) !important;
 }
 .borderColorProject1 {
-    border-color:  rgba(83, 110, 55, 1);
+    border-color:  rgba(83, 110, 55, 1) !important;
+}
+.borderColorProject2 {
+    border-color: rgb(0, 168, 205) !important;
+}
+.borderColorProject22 {
+    border-color: rgba(0, 168, 205, 0.25) !important;
 }
 
 /* BORDER RADIUS:: */
 
+.borderRadius01 {
+    border-radius: 0.35em;
+}
+.borderRadius02 {
+    border-radius: 1em;
+}
+.borderRadius03 {
+    border-radius: 2em;
+}
 .borderRadius1 {
     border-radius: 10%;
 }
@@ -118,6 +142,7 @@ ul {
 .borderRadius3 {
     border-radius: 50%;
 }
+
 
 /* BRDER LEFT RADIUS */
 
@@ -154,17 +179,41 @@ ul {
 .color3 {
     color: rgba(84, 84, 84, 1);
 }
+.color31 {
+    color: rgba(84, 84, 84, 0.75);
+}
 .color4 {
     color: rgba(158, 158, 158, 1);
 }
+.color5 {
+    color: #00a8cd;
+}
 .colorWhite {
     color: white;
+}
+.colorBlack {
+    color: rgb(0, 0, 0);
+}
+.colorLightGrey {
+    color:   rgb(211, 209, 209);
+}
+.colorLightGrey2 {
+    color:   rgb(184, 184, 184);
 }
 
 /* COLOR BACKGROUND CLASS:: */
 
 .backColorProject1 {
     background-color: rgba(83, 110, 55, 1);
+}
+.backColorWhite {
+    background-color: rgb(255, 255, 255);
+}
+.backColorWhite09 {
+    background-color: rgba(255, 255, 255, 0.975);
+}
+.backColorProject2 {
+    background-color: #00a8cd;
 }
 
         /* FLEXBOX CLASS:::: */
@@ -229,6 +278,12 @@ ul {
 }
 .fontSize6 {
     font-size: larger;
+}
+.fontSize65 {
+    font-size: 2.5em;
+}
+.fontSize7 {
+    font-size: 3em;
 }
 
  /* FONT FORMAT:: */
@@ -382,6 +437,9 @@ ul {
 
 /* PADDING:: */
 
+.padding025 {
+    padding: 0.25em !important;
+}
 .padding05 {
     padding: 0.5em !important;
 }
@@ -391,6 +449,9 @@ ul {
 
 /* PADDING LEFT */
 
+.paddingLeft0 {
+    padding-left: 0 !important;
+}
 .paddingLeft1 {
     padding-left: 1em !important;
 }
@@ -405,6 +466,30 @@ ul {
 
 .paddingRight1 {
     padding-right: 1em !important;
+}
+
+/* PADDING TOP */
+
+.paddingTop1 {
+    padding-top: 1em !important;
+}
+.paddingTop2 {
+    padding-top: 2em !important;
+}
+
+/* PADDING  bottom */
+
+.paddingBottom1 {
+    padding-bottom: 1em !important;
+}
+.paddingBottom2 {
+    padding-bottom: 2em !important;
+}
+.paddingBottom3 {
+    padding-bottom: 3em !important;
+}
+.paddingBottom5 {
+    padding-bottom: 5em !important;
 }
 
         /* POSITION CLASS:::: */

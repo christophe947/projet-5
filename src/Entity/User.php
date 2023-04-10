@@ -4,12 +4,15 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use App\Traits\TimeStampTrait;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'Il existe deja un compte avec cet E-mail')]
+#[ORM\HasLifecycleCallbacks()]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimeStampTrait;
@@ -18,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -37,14 +40,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 45)]
     private ?string $firstname = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $age = null;
-
-    #[ORM\Column(length: 45)]
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $birthday = null;
+    
+    #[ORM\Column(length: 45, nullable: true)]
     private ?string $pseudo = null;
+    
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
     #[ORM\Column]
     private ?int $status = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $googleId = null;           //google
 
     
 
@@ -142,14 +151,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAge(): ?int
+    public function getBirthday(): ?\DateTime
     {
-        return $this->age;
+        return $this->birthday;
     }
 
-    public function setAge(int $age): self
+    public function setBirthday(?\DateTime $birthday): self
     {
-        $this->age = $age;
+        $this->birthday = $birthday;
 
         return $this;
     }
@@ -165,6 +174,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
 
     public function getStatus(): ?int
     {
@@ -174,6 +195,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getGoogleId(): string
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(string $googleId): self
+    {
+        $this->googleId = $googleId;
 
         return $this;
     }
