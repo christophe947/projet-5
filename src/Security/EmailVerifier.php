@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,16 +18,20 @@ class EmailVerifier
         private VerifyEmailHelperInterface $verifyEmailHelper,
         private MailerInterface $mailer,
         private EntityManagerInterface $entityManager,
-        private RouterInterface $router
+        private RouterInterface $router,
     ) {
     }
 
     public function sendEmailConfirmation(string $verifyEmailRouteName, UserInterface $user, TemplatedEmail $email): void
     {
+        /** @var User $user */
+        
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
             $verifyEmailRouteName,
+            
             $user->getId(),
-            $user->getEmail()
+            $user->getEmail(),
+            ['id' => $user->getId()] //3 argument
         );
 
         $context = $email->getContext();
@@ -38,22 +43,20 @@ class EmailVerifier
 
         $this->mailer->send($email);
     }
-
     /**
      * @throws VerifyEmailExceptionInterface
      */
-    public function handleEmailConfirmation(Request $request, UserInterface $user = null): void
+    public function handleEmailConfirmation(Request $request, UserInterface $user): void
     {
-        if($user != null) {
-            $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
-
+        /** @var User $user */
+        
+        $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());  
+ 
             $user->setIsVerified(true);
-            //var_dump('trp'); die();
-
+            $role = $user->getRoles();
+            $user->setRoles($role);
+            
             $this->entityManager->persist($user);
             $this->entityManager->flush();
-        } else {
-            $this->router->generate('app_register');
-        }
-    }
+        } 
 }

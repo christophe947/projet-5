@@ -1,8 +1,29 @@
+
 {% extends 'template.html.twig' %}
 
-{% block title %}cvcvc{% endblock %}
+{% block title %}Log in!{% endblock %}
+
+{% block pageTitle %}{% endblock %}
 
 {% block body %}
-     <p>Ce compte existe deja mais n'est pas encore associé a google afin de lassocier cliqier ici: <a class="nav-link" href="{{ path('associate_google') }}">Associer mon compte avec google</a></p>    
-{% endblock %}
+<div id="page" class="login flex flexColumn textAlignCenter alignItemCenter justifyCenter">
     
+    <div id="loginPortal" class="flex flexColumn paddingTop1 paddingBottom2 marginBottom2 borderRadius02 backColorWhite09">
+        <form method="post">
+            
+          <h1 class="fontProject color1 fontSize4 marginBottom1">Info-Association</h1>
+          <p class="color31 fontSize3 padding05 fontProject" >Ce compte existe deja mais n'est pas encore associé a google</p>     
+                
+          <br>
+            
+
+          <button id="loginButton" class="fontSize3 padding025 marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2">
+               <a class="fontProject colorWhite" href="{{ path('associate_google') }}">Associer mon compte avec google</a>
+          </button>
+            
+        </form>
+        
+    </div>
+    
+</div>
+{% endblock %}

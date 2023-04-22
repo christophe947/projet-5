@@ -1,4 +1,4 @@
-        /* PAGE DACCUEIL:::: */
+        /* PAGE LOGIN/INSCRIPTION:::: */
 
 
 .accueil {
@@ -6,17 +6,8 @@
     background-size: cover;
     background-position: 50% 55%;            
 }
-.accueil h1 {
-    margin-top: -5em !important;
-    /*text-shadow: rgb(216, 212, 195) 1px 1px 20px;*/
-}
 
-#homePortal {
-    width: 20em; 
-}
-
-
-        /* FIN PAGE ACCUEIL */
+        /* FIN LOGIN/INSCRIPTION */
 
 
         /* PAGE DE LOGIN:::: */
@@ -28,8 +19,16 @@
     background-position: 30% 15%;     
 }
 #loginPortal {
-    width: 30%;
+    max-width: 30%;
+    width: 35em;;
     box-shadow: rgb(0, 0, 0) 1px 1px 60px;
+    /*position: fixed;*/
+}
+#loginPortalXL {
+    max-width: 40%;
+    width: 45em;;
+    box-shadow: rgb(0, 0, 0) 1px 1px 60px;
+    /*position: fixed;*/
 }
 .hrco {
     width: 90%;
@@ -39,17 +38,19 @@
     width: 3em;
 }
 .input1 {
-    width: 50%;
-    
+    width: 48.5%;
+}
+.input2 {
+    width: 45%;
 }
 #loginButton {
     margin-left: 0.8em;
-    /*width: 15.7em;*/
+    padding: 0.45em !important;
     width: 55%;
     transition: 0.5s;
 }
 #loginButton:hover {
-    opacity: 0.95;
+    opacity: 0.85;
     cursor: pointer;
     box-shadow:  rgba(0, 0, 0, 0.5) 1px 1px 10px;
     transition-duration: 0.25s;
@@ -84,23 +85,53 @@
 
         /* PAGE INSCRIPTION */
 
-#formRegister {
-   
-    width: 100% !important;
-    
-}
+
 .registerButton1 {
     width: 90%;
+    transition: 0.25s;
+    
 }
 .registerButton2 {
     width: 90%;
+    padding: 1em !important;
+    cursor: pointer;
+    transition: 0.25s;
 }
-.input2 {
+.registerButton1:hover, .registerButton2:hover {
+    opacity: 0.75;
+    box-shadow:  rgba(0, 0, 0, 0.5) 1px 1px 10px;
+    transition-duration: 0.25s;
+}
+.form1 {
+    width: 100%;
+}
+.rowForm1 {
+    width: 100%! important;
+}
+.inputBirthday {
+    width: 45%; 
+}
+.error1 li {
+    margin-top: -1.75em;
+    margin-bottom: -0.5em;
+    opacity: 0.85;
+}
+#titleRegister {
+    margin-bottom: -0.15em;
+}
+#hrRegister {
     width: 100%;
 }
 
         /* FIN PAGE INSCRIPTION */
-       
+
+       /*  RESET PASS  */
+
+.error2 li {
+    margin-bottom: -1em;
+    opacity: 0.85;
+}
+       /* FIN RESET PASS */
 
        /* PAGE PROFIL PERSONNE:::: */
 
@@ -153,6 +184,27 @@
 .titleMenu {
     padding-left: 15%;
 }
+#logout {
+    padding: 0.85em;
+    padding-left: 15%;
+    transition: 0.25s;
+}
+#logout:hover {
+    color: rgb(236, 84, 57);
+    background-color: rgb(255, 235, 226);
+    transition-duration: 0.25s;
+}
+#login1 {
+    padding: 0.85em;
+    padding-left: 15%;
+    transition: 0.25s;
+}
+#login1:hover {
+    color:  rgb(1, 182, 55);
+    background-color:  rgb(230, 255, 239);
+    transition-duration: 0.25s;
+}
+
 
 /* LOGO APPLI:: */
 
@@ -201,6 +253,16 @@
     width: 100%; 
 }
 
+/* DEMANDE DE LIEN DE CONFIRM */
+
+.repeat i {
+    transition: 0.5s;
+}
+.repeat i:hover {
+    color: rgb(236, 84, 57);
+    transform: scale(1.25) rotate(360deg);
+    transition-duration: 0.75s;
+}
 
 /* INFO HAUT DROITE:: */
 
@@ -211,18 +273,20 @@
     height: 1.5em;  
     border-radius: 35px; 
 }
+#pastilleAddHover {
+    transition: 0.25s;
+}
 #pastilleAddHover:hover {
-    background-color: rgba(83, 110, 55, 0.493);
+    opacity: 0.693;
     cursor: pointer;
+    transition-duration: 0.25s;
 }
 
 /* NAV PROFIL CENTER:: */
 
-#navProfil {
-    
+#navProfil { 
     width: 40em;
     max-width: 95%;
-    
 }
 
         /* FIN PAGE PROFIL PERSONNE:::: */

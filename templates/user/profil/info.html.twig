@@ -1,16 +1,25 @@
 {% extends 'templateProfil.html.twig' %}
 
-{% block title %}Profil Info{% endblock %}
+{% block title %}Info {{ user.firstname }}{% endblock %}
 
 {% block titleProfil %}
     <h1 class="paddingLeft2 fontSize4 fontProject color3 marginTop1A">Information</h1>
 {% endblock %}
     
 {% block Profil %}
-    {% if user.id == auth.id  %} {# je suis sur mon profil perso #}    {# form completedProfilForm #}
-        moi
-    {% else %} {# je suis sur le profil d'un user !== moi #} 
-        Anonymous
+    {% if auth != false and user.id == auth.id %}
+        <p class="color4 paddingLeft3">I see my Personal zone</p>
+        <div class="paddingLeft3">
+            Editer : 
+        </div>
+    {% endif %}  
+    {% if auth == false or user.id != auth.id or auth != false %}
+        <p class="color4 paddingLeft3">Visitor see this profil</p>
+        <div class="paddingLeft3">
+            <p>Prenom : {{ user.firstname|capitalize }}</p>
+            <p>Nom : {{ user.name|capitalize }}</p>
+            <p>Anniversaire : {{ user.birthday|date("d/m/Y") }}
+        </div>
     {% endif %}
-        
+    
 {% endblock %}

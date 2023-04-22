@@ -16,8 +16,8 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     public function load(ObjectManager $manager): void
     {
         $admin1 = new User();
-        $admin1->setEmail('admin1@gmail.com');
-        $admin1->setPassword($this->hasher->hashPassword($admin1,'admin1'));
+        $admin1->setEmail('admin@gmail.com');
+        $admin1->setPassword($this->hasher->hashPassword($admin1,'admin'));
         $admin1->setRoles(['ROLE_ADMIN']);
         $admin1->setName('dupont');
         $admin1->setFirstname('jean');
@@ -31,7 +31,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $admin2->setEmail('admin2@gmail.com');
         $admin2->setPassword($this->hasher->hashPassword($admin2,'admin2'));
         $admin2->setRoles(['ROLE_ADMIN']);
-        $admin2->setName('dumont');
+        $admin2->setName('durand');
         $admin2->setFirstname('luc');
         $admin2->setBirthday(new \DateTime('1999-08-24'));
         $admin2->setPseudo('sky');

@@ -23,7 +23,7 @@ Class MailerService
             ->to($to)
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
-            ->replyTo($this->replyTo)
+            ->replyTo($this->replyTo) //config service .yaml bind $replyTo: 'christophe.gpa@gmail.com'
             //->priority(Email::PRIORITY_HIGH)
             ->subject($subject)
             ->text('Sending emails is fun again!')

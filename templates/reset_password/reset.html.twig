@@ -1,0 +1,47 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+    
+{% block pageTitle %}{% endblock %}
+    
+    
+        
+{% block body %}
+    <div id="page" class="login flex flexColumn textAlignCenter alignItemCenter justifyCenter">    
+        <div id="loginPortalXL" class="flex flexColumn paddingTop1 paddingBottom2 marginBottom2 borderRadius02 backColorWhite09">
+    
+        <h1 class="fontProject color1 fontSize4">Reinitialiser votre mot de passe</h1>
+
+        <small class="fontSize2 fontProject colorLightGrey marginBottom1">
+            Rentrez votre nouveau mot de passe
+        </small> 
+
+        {{ form_start(resetForm) }}
+
+            <div class="rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                <label class="fontProject color1 fontSize3">
+                    {{ form_label(resetForm.plainPassword.first) }}
+                    &nbsp &nbsp
+                </label>
+                {{ form_widget(resetForm.plainPassword.first, {'attr': {'autofocus': true, 'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02'}}) }}   
+                </div>
+                <div class="marginLeft14 fontProject colorRed">
+                    {{ form_errors(resetForm.plainPassword.first) }}
+                </div>
+                    
+                <div class="rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                    <label class="fontProject color1 fontSize3">
+                        {{ form_label(resetForm.plainPassword.second) }}
+                        &nbsp &nbsp &nbsp
+                    </label>    
+                    {{ form_widget(resetForm.plainPassword.second,  {'attr': {'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02'}}) }}
+                </div>
+                
+                <button id="loginButton" class="marginTop1 fontProject fontSize3 padding025 colorWhite marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2">
+                    Restaurer mon mot de passe
+                </button>
+    
+        {{ form_end(resetForm) }}
+        </div>
+        </div>
+{% endblock %}

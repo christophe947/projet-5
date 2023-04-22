@@ -2,8 +2,82 @@
     font-family: "Montserrat";
     src: local("Montserrat"), url("fonts/Montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");
   }
-  
+                /* FLASH MESSAGE */
+
+.error, .success, .info {
+    animation-duration: 1.5s;
+    animation-delay: 0.15s;
+    animation-fill-mode: forwards;
+    margin-top: -4em;
+    color: white;
+    width: 100%;
+    height: 4em;
+    max-height: 10%;
+    position: fixed;
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow:  rgba(0, 0, 0, 0.5) 1px 1px 10px;
+    border-radius: 0.35em !important;
+    z-index: 10 !important;
+}
+.error {
+    animation-name: mouvFlashError;
+    background-color: rgba(240, 9, 9, 0.25);
+}
+.success {
+    animation-name: mouvFlashSuccess;
+    background-color: rgba(11, 231, 77, 0.25);
+}
+.info {
+    animation-name: mouvFlashInfo;
+    background-color: rgba(27, 219, 210, 0.25);
+}
+@keyframes mouvFlashError {
+    0%   {
+        margin-top: -4em;
+    }
+    95% {
+        background-color: rgba(240, 9, 9, 0.733);
+        margin-top: 0.5em;
+    }
+    100% {
+        background-color: rgba(240, 9, 9, 0.8);
+        margin-top: 0;
+    }
+}
+@keyframes mouvFlashSuccess {
+    0%   {
+        margin-top: -4em;
+    }
+    95% {
+        background-color: rgba(11, 231, 77, 0.733);
+        margin-top: 0.5em;
+    }
+    100% {
+        background-color: rgba(11, 231, 77, 0.8);
+        margin-top: 0;
+    }
+}
+@keyframes mouvFlashInfo {
+    0%   {
+        margin-top: -4em;
+    }
+    95% {
+        background-color: rgba(27, 219, 210, 0.733);
+        margin-top: 0.5em;
+    }
+    100% {
+        background-color: rgba(27, 219, 210, 0.8);
+        margin-top: 0;
+    }
+}
+
+                /* FIN FLASH MESSAGE */
+
+
                 /* OPTION DE BALISE GENERAL:::::: */
+
 
 
 /* BLOCK PAGE:: */
@@ -20,9 +94,7 @@ body {
 hr {
     border: none;
     border-top: 1px solid #f3f3f3;
-    
     text-align: center;
-    
 }
 
 /* LIENS:: */
@@ -46,6 +118,7 @@ input:focus {
 input:visited {
     outline: 2px solid orange; 
 }
+
                 /* FIN OPTION DE BALISE GENERAL */
 
 
@@ -69,6 +142,9 @@ input:visited {
 }
 .alignItemBaseline {
     align-items: baseline;
+}
+.alignSelfCenter {
+    align-self: center;
 }
         
         /* BORDER CLASS:::: */
@@ -187,6 +263,12 @@ input:visited {
 }
 .color5 {
     color: #00a8cd;
+}
+.colorRed {
+    color: rgb(236, 84, 57);
+}
+.colorGreen {
+    color: green;
 }
 .colorWhite {
     color: white;
@@ -377,11 +459,17 @@ input:visited {
 .marginLeft5 {
     margin-left: 5em;
 }
+.marginLeft9 {
+    margin-left: 9em;
+}*
 .marginLeft-5 {
     margin-left: -5em;
 }
 .marginLeft10 {
     margin-Left: 10em;
+}
+.marginLeft14 {
+    margin-Left: 14em;
 }
 
 /* MARGIN RIGHT:: */

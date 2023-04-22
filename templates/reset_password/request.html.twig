@@ -1,0 +1,46 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Reset-password{% endblock %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="error fontProject textAlignCenter">
+            <a class="colorWhite" href="{{ app.request.server.get('http-referer') }}">{{ flash_error }}&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<i class="fa-solid fa-xmark"></i>&nbsp</a>
+        </div>
+    {% endfor %}
+
+    <div id="page" class="login flex flexColumn textAlignCenter alignItemCenter justifyCenter">
+        <div id="loginPortal" class="flex flexColumn paddingTop1 paddingBottom2 marginBottom2 borderRadius02 backColorWhite09">
+
+            <h1 class="fontProject color1 fontSize4">Recuperation du mot de passe</h1>
+
+            {{ form_start(requestForm) }}
+
+                <small class="fontProject fontSize2 colorLightGrey2">
+                    Entrez votre adresse e-mail.<br>
+                    Nous vous enverons un lien pour reinitialiser votre mot de passe.
+                </small>        
+
+                <div class="rowForm1 justifyCenter flex marginTop1 marginBottom1 alignItemCenter">
+                    <label class="fontProject color1 fontSize3">
+                        {{ form_label(requestForm.email) }}
+                        &nbsp &nbsp<i class="fa-regular fa-envelope"></i>&nbsp &nbsp &nbsp &nbsp &nbsp
+                    </label>                        
+                    {{ form_widget(requestForm.email, {'attr': {'autofocus': true, 'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}} ) }}
+                </div>
+
+                <div class="marginLeft9 error2 fontProject colorRed">
+                    {{ form_errors(requestForm.email) }}
+                </div>
+                    
+                <button id="loginButton" class="marginTop1 fontProject fontSize3 padding025 colorWhite marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2">
+                    Envoyer Email de recuperation
+                </button>
+
+            {{ form_end(requestForm) }}
+        </div>
+    </div>
+{% endblock %}

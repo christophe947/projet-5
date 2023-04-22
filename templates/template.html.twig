@@ -24,20 +24,20 @@
             {% endblock %}
 
             {% for message in app.session.flashBag.get('info') %}
-                <div class="alert alert-info">
-                    {{ message }}   {# commentaire twig #}
+                <div class="info fontProject">
+                    <a class="colorWhite" href="{{ app.request.server.get('http-referer') }}">{{ message }}&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<i class="fa-solid fa-xmark"></i>&nbsp</a>  {# commentaire twig #}
                 </div>
             {% endfor %}
 
             {% for message in app.session.flashBag.get('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
+                <div class="success fontProject">
+                    <a class="colorWhite" href="{{ app.request.server.get('http-referer') }}">{{ message }}&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<i class="fa-solid fa-xmark"></i>&nbsp</a>
                 </div>
             {% endfor %}
 
             {% for message in app.session.flashBag.get('error') %}
-                <div class="alert alert-danger">
-                    {{ message }}
+                <div class="error fontProject">
+                    <a class="colorWhite" href="{{ app.request.server.get('http-referer') }}">{{ message }}&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<i class="fa-solid fa-xmark"></i>&nbsp</a>
                 </div>
             {% endfor %}
             {% block body %}

@@ -19,10 +19,10 @@
                 </div>
             {% endif %}
 
-            <h1 class="fontProject color1 fontSize65 marginBottom1">My App</h1>
+            <h1 class="fontProject color1 fontSize65 marginBottom1">Around Music</h1>
 
-            <p class="marginLeft-3"><label class="fontProject color1 fontSize3" for="inputEmail">Email &nbsp</label><input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31" autocomplete="email" required autofocus></p>
-            <p class="marginLeft-3"><label class="fontProject color1 fontSize3" for="inputPassword">Pass &nbsp &nbsp</label><input type="password" name="password" id="inputPassword" class="input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02" autocomplete="current-password" required></p>
+            <p class="marginLeft-1"><label class="fontProject color1 fontSize3" for="inputEmail">E-mail &nbsp &nbsp<i class="fa-regular fa-envelope"></i>&nbsp &nbsp &nbsp &nbsp</label><input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31" autocomplete="email" required autofocus></p>
+            <p class="marginLeft-1"><label class="fontProject color1 fontSize3" for="inputPassword">Mot de passe &nbsp</label><input type="password" name="password" id="inputPassword" class="input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02" autocomplete="current-password" required></p>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
@@ -30,7 +30,7 @@
                 Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
                 See https://symfony.com/doc/current/security/remember_me.html #}
 
-                <div>
+                <div class="marginLeft1">
                     <label class="fontProject colorLightGrey2">
                         <input id="check1" class="colorLightGrey2" type="checkbox" name="_remember_me"> Se souvenir de moi
                     </label>
@@ -50,7 +50,7 @@
             <a id="linkGoogle1" href="{{ path('connect_google') }}" class="flex justifyCenter fontProject color1 fontSize3"><img id="logoGoogle" src="{{ asset('assets/images/google_logo.png') }}"><p>&nbsp Se connecter avec Google</p></a>
         </div>
         <div class="marginAuto">
-            <a href="" class="flex justifyCenter"><p class="link1 fontProject fontSize2 color31">Mot de passe oublié ?</p></a>
+            <a href="{{ path('app_forgot_password_request') }}" class="flex justifyCenter"><p class="link1 fontProject fontSize2 color31">Mot de passe oublié ?</p></a>
         </div>
     </div>
     <div id="loginPortal" class="flex flexColumn paddingTop2 paddingBottom2 borderRadius02 backColorWhite09">

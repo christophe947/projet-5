@@ -3,3 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+PageNotFound:
+    path: 
+        - /{path}
+        - /{path}/{id}
+        - profil/{path}
+        - profil/{id}/{path}
+    controller: App\Controller\PageNotFoundController::PageNotFoundAction

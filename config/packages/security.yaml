@@ -13,12 +13,19 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        # user:
+            # pattern: ^/profil/
+            # lazy: true
+            # provider: app_user_provider
+            # user_checker: App\Security\UserChecker
+            # context: authenticate
         main:
             lazy: true
             provider: app_user_provider
             custom_authenticator: 
                 - App\Security\Authenticator
                 - App\Security\GoogleAuthenticator
+            # user_checker: App\Security\UserChecker
             logout:
                 path: app_logout
                 target: app_login
@@ -28,7 +35,7 @@ security:
                 secret: '%kernel.secret'
                 lifetime: 604800 # 1 week in seconds
                 # always_remember_me: true # rend inutile le lifetime / active l'option toujours par default
-
+            # context: authenticate
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 

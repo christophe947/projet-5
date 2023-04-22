@@ -12,6 +12,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -19,16 +20,15 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-//use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 
 class GoogleAuthenticator extends OAuth2Authenticator
 {
     private ClientRegistry $clientRegistry;
     private EntityManagerInterface $entityManager;
-    private RouterInterface $router;
+    //private RouterInterface $router;
     
-    public function __construct(private MailerService $mailer,  private Security $security, ClientRegistry $clientRegistry, EntityManagerInterface $entityManager, RouterInterface $router, private UserPasswordHasherInterface $hasher)
+    public function __construct(private MailerService $mailer,  private Security $security, ClientRegistry $clientRegistry, EntityManagerInterface $entityManager, private RouterInterface $router, private UserPasswordHasherInterface $hasher)
     {
         $this->clientRegistry = $clientRegistry;
         $this->entityManager = $entityManager;
@@ -46,8 +46,6 @@ class GoogleAuthenticator extends OAuth2Authenticator
         $session = $request->getSession();
         $register = $session->get('register');
         $associate = $session->get('associate');
-        //$session->getFlashBag();
-        $session->remove('register');
         $session->remove('associate');
         $session->remove('associatePage');
         
@@ -57,14 +55,12 @@ class GoogleAuthenticator extends OAuth2Authenticator
         return new SelfValidatingPassport(
             new UserBadge($accessToken->getToken(), function () use ($accessToken, $client, $register, $associate, $session) {
                 /** @var GoogleUser $googleUser */
-             
                 $googleUser = $client->fetchUserFromToken($accessToken);
                 
                 $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['googleId' => $googleUser->getId()]); //le compte existe en Google donc en normal aussi avec mdp generé envoyé
                 $existingUserNotGoogle = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $googleUser->getEmail()]); //le compte existe mais pas en Google on peu lassocier apres
-                //var_dump($existingUser);die();
-                //User doesn't exist, we create it !
-                if ($register === '1' && empty($existingUser)) {
+                
+                if ($register === '1' && empty($existingUser) && empty($existingUserNotGoogle)) {
                     $existingUser = new User();
                     $email = $googleUser->getEmail();
                     $existingUser->setEmail($email);
@@ -82,27 +78,30 @@ class GoogleAuthenticator extends OAuth2Authenticator
                     $this->entityManager->persist($existingUser);
                     $this->entityManager->flush();
 
-                    $this->mailer->sendEmail(to: $email, content: 'Votre mot de passe actuel est: ' . $pass . ' Vous pouvez le modifier par la suite', subject: 'E-mail envoyé par Aroun-Me'); //ici pour envoyer pass decrypté
-                    $session->getFlashBag()->set('error', 'Mdp send');//$this->addFlash('info', "Votre enregistrement est bien pris en compte, reste a confirmer votre email");
-                    //session message flash : un email a été envoyé ...
-                }
+                    /** @var Session $session */
+                    $session->getFlashBag()->set('success', 'Votre inscription a bien été prise en compte');
+                    $session->remove('register');//supprime en cas de reussite
+                    return $existingUser;
+                } 
+                
                 if ($register === '1' && !empty($existingUser)) {
-                    //$session = $request->getSession();
-                    $session->getFlashBag()->set('error', 'Compte existe deja');
-                    
+                    /** @var Session $session */
+                    $session->getFlashBag()->set('error', 'Ce compte existe deja');
+                    return false;
                 }
+                
                 if($associate === '1' ) {
                     $existingUser = $existingUserNotGoogle;
                     $existingUser->setGoogleId($googleUser->getId());  //return $existingUser permet detre connecté
                     $this->entityManager->persist($existingUser);
                     $this->entityManager->flush();
-                    $session->getFlashBag()->set('error', 'Votre comtpe est asocié avec google');
+                    /** @var Session $session */
+                    $session->getFlashBag()->set('success', 'Votre comtpe est associé avec google');
                 }
                 
                 if ($associate != '1' && $existingUserNotGoogle && !$existingUser) {
                     $session->set('associatePage', '1');
                 }
-                //var_dump($existingUser);die();
                 return $existingUser;     //log direct
             })
         );
@@ -113,6 +112,7 @@ class GoogleAuthenticator extends OAuth2Authenticator
         
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        /** @var User $user */
         $user = $this->security->getUser();
         $id = $user->getId();
         return new RedirectResponse(
@@ -129,11 +129,17 @@ class GoogleAuthenticator extends OAuth2Authenticator
                 $this->router->generate('associate_google_page')
             );
         }
-        $session->getFlashBag()->set('error', "Aucun compte n'est enregistre veuilez vous inscrire");
+        if($session->get('register') === '1') {
+            $session->remove('register');//garde la session jusqua maintenant si echec flash message : ($register === '1' && !empty($existingUser))
+            return new RedirectResponse(
+                $this->router->generate('app_login') 
+            );
+        }
+        $session->remove('register');//supprime en cas dechec
+        /** @var Session $session */
+        $session->getFlashBag()->set('error', "Aucun compte n'est enregistre veuillez vous inscrire");
         return new RedirectResponse(        //echec global rien de lié
-            $this->router->generate('app_register')
-            
+            $this->router->generate('app_register')   
         );
     }
-
 }

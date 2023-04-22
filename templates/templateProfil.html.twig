@@ -29,10 +29,13 @@
                 <h2 class="titleMenu fontSize3 color1 fontProject maj">Vos information</h2>
 
                 <ul id="leftMenu" class="fontProject flex flexColumn">
-                    <li><a href="{{ path('user_profil', { id: auth.id }) }}" class="alignItemBaseline flex leftMenu {% if classLeftMenuProfiSelected|default %} color3 {% else %} color4 {% endif %}"><i class="fa-solid fa-user"></i>&nbsp Mon profil</a></li>
-                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-chart-line"></i>&nbsp Mon Dashboard</a></li>
-                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-envelope"></i>&nbsp Messages</a></li>
-                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-gear"></i>&nbsp Parametres</a></li>
+                    {% if auth != false %}
+                        <li><a href="{{ path('user_profil', { id: auth.id }) }}" class="alignItemBaseline flex leftMenu {% if classLeftMenuProfiSelected|default %} color3 {% else %} color4 {% endif %}"><i class="fa-solid fa-user"></i>&nbsp Mon profil</a></li>
+                        <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-chart-line"></i>&nbsp Mon Dashboard</a></li>
+                        <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-envelope"></i>&nbsp Messages</a></li>
+                        <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-gear"></i>&nbsp Parametres</a></li>
+                    {% endif %}
+                <li><a {% if auth != false %}onClick="return confirm('Etes-vous sur ?')"{% endif %} href="{{ path('app_logout') }}" id="{% if auth != false %}logout{% else %}login1{% endif %}" class="alignItemBaseline flex color4"><i class="fa fa-power-off"></i>{% if auth != false %}&nbsp Deconnection{% else %}&nbsp Se connecter{% endif %}</a></li>
                 </ul>
             </nav>
         </div>
@@ -51,7 +54,16 @@
                     <div id="pictureProfil" class="border borderMiddle borderColorWhite borderRadius1 marginLeft3 relative overflowHidden marginRight2">
                         <img id="imageCouverture" src="{{ asset('assets/images/no-profile-picture-icon-7.png') }}">
                     </div>
-                    <h2 class="fontSize4 fontProject color3">{{ user.firstname|capitalize }} {{ user.name|capitalize }}</h2>
+                    <h2 class="fontSize4 fontProject color3">{{ user.firstname|capitalize }} {{ user.name|capitalize }}</h2>&nbsp &nbsp &nbsp
+                    {% if user.isverified == false %}
+                        <h2 class="alignSelfCenter colorRed fontSize3 fontProject"><i class="fa-solid fa-xmark"></i>&nbsp Profil non verifié
+                            {% if auth != false and user.id == auth.id %}
+                                &nbsp &nbsp<a title="Renvoyer un lien de verification" class="repeat fontSize3 color31" href="{{ path('app_newlink_email', { id: auth.id }) }}"><i class="fa-solid fa-arrow-rotate-right"></i></a>
+                            {% endif %}
+                        </h2>
+                    {% else %}
+                        <i class="alignSelfCenter colorGreen fa-solid fa-check"></i>
+                    {% endif %}
                 </div>
                 <div id="partRightRow" class="fontProject marginTop1 paddingRight1 flex flexRow justifyAround">
                     <div class="pastille marginAuto flex alignItemCenter border borderSmall borderColorLightGrey borderRadius1 padding05 paddingLeft1 paddingRight1 color4">
@@ -68,11 +80,11 @@
             <div class="">
                 <nav class="color1 paddingLeft1">
                     <ul id="navProfil" class="maj fontSize3 fontProject flex justifyAround">
-                        <li><a href="{{ path('user_profil', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedProfil is defined %} {{ classSelectedProfil }} {% endif %}">Profil</a></li>
+                        <li><a href="{{ path('user_profil', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedProfil is defined %} {{ classSelectedProfil }} {% endif %}">Fil d'actualité</a></li>
                         <li><a href="{{ path('user_media', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedMedia is defined %} {{ classSelectedMedia }} {% endif %}">Media</a></li>
                         <li><a href="{{ path('user_event', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedEvent is defined %} {{ classSelectedEvent }} {% endif %}">Evenement</a></li>
-                        <li><a href="{{ path('user_info', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedInfo is defined %} {{ classSelectedInfo }} {% endif %}">A propos</a></li>
-                        <li><a href="{{ path('user_contact', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedContact is defined %} {{ classSelectedContact }} {% endif %}">Contacter</a></li>
+                        <li><a href="{{ path('user_info', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedInfo is defined %} {{ classSelectedInfo }} {% endif %}">Profil</a></li>
+                        <li><a href="{{ path('user_contact', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedContact is defined %} {{ classSelectedContact }} {% endif %}">Contact</a></li>
                     </ul>
                 </nav>
             </div>
