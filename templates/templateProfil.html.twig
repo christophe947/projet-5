@@ -58,7 +58,7 @@
                     {% if user.isverified == false %}
                         <h2 class="alignSelfCenter colorRed fontSize3 fontProject"><i class="fa-solid fa-xmark"></i>&nbsp Profil non verifié
                             {% if auth != false and user.id == auth.id %}
-                                &nbsp &nbsp<a title="Renvoyer un lien de verification" class="repeat fontSize3 color31" href="{{ path('app_newlink_email', { id: auth.id }) }}"><i class="fa-solid fa-arrow-rotate-right"></i></a>
+                                &nbsp &nbsp<a {#title="Renvoyer un lien de verification"#} aria-label="Renvoyer un lien de verification" class="bubble-info repeat fontSize3 color31" href="{{ path('app_newlink_email', { id: auth.id }) }}"><i class="fa-solid fa-arrow-rotate-right"></i></a>
                             {% endif %}
                         </h2>
                     {% else %}
@@ -80,9 +80,9 @@
             <div class="">
                 <nav class="color1 paddingLeft1">
                     <ul id="navProfil" class="maj fontSize3 fontProject flex justifyAround">
-                        <li><a href="{{ path('user_profil', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedProfil is defined %} {{ classSelectedProfil }} {% endif %}">Fil d'actualité</a></li>
-                        <li><a href="{{ path('user_media', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedMedia is defined %} {{ classSelectedMedia }} {% endif %}">Media</a></li>
-                        <li><a href="{{ path('user_event', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedEvent is defined %} {{ classSelectedEvent }} {% endif %}">Evenement</a></li>
+                        <li><a href="{{ path('user_profil', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedProfil is defined %} {{ classSelectedProfil }} {% endif %}">Fil d'actualités</a></li>
+                        <li><a href="{{ path('user_media', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedMedia is defined %} {{ classSelectedMedia }} {% endif %}">Medias</a></li>
+                        <li><a href="{{ path('user_event', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedEvent is defined %} {{ classSelectedEvent }} {% endif %}">Evenements</a></li>
                         <li><a href="{{ path('user_info', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedInfo is defined %} {{ classSelectedInfo }} {% endif %}">Profil</a></li>
                         <li><a href="{{ path('user_contact', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedContact is defined %} {{ classSelectedContact }} {% endif %}">Contact</a></li>
                     </ul>

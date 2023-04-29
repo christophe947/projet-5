@@ -291,3 +291,37 @@
 
         /* FIN PAGE PROFIL PERSONNE:::: */
 
+.bubble-info {
+    position: relative;  /*les .picto-item deviennent référents*/
+    /*cursor: help;*/
+    cursor: pointer;
+    border-radius: 50%;
+}
+.bubble-info:hover:after, .bubble-info:focus:after {
+    content: attr(aria-label); 
+    position: absolute;
+    top: -2.4em;
+    left: 50%;
+    transform: translateX(-50%); /* on centre horizontalement  */
+    z-index: 50; /* pour s'afficher au dessus des éléments en position relative */
+    white-space: nowrap;  /* on interdit le retour à la ligne*/
+    padding: 5px 14px;
+    background: #413219;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 1.2rem;  
+}
+[aria-label]:focus {
+    outline: none !important;
+}
+[aria-label]:hover:before, [aria-label]:focus:before {
+    content: "▼";
+    position: absolute;
+    top: -1.1em;
+	left: 50%;
+	transform: translateX(-50%); /* on centre horizontalement  */
+  font-size: 20px;
+  color: #413219;
+}
+
+
