@@ -26,16 +26,16 @@
         </div>
         <div>
             <nav class="textAlignStart">
-                <h2 class="titleMenu fontSize3 color1 fontProject maj">Vos information</h2>
+                <h2 class="titleMenu fontSize3 color1 fontProject maj">Vos informations</h2>
 
                 <ul id="leftMenu" class="fontProject flex flexColumn">
                     {% if auth != false %}
-                        <li><a href="{{ path('user_profil', { id: auth.id }) }}" class="alignItemBaseline flex leftMenu {% if classLeftMenuProfiSelected|default %} color3 {% else %} color4 {% endif %}"><i class="fa-solid fa-user"></i>&nbsp Mon profil</a></li>
+                        <li><a href="{{ path('index', { id: auth.id }) }}" class="alignItemBaseline flex leftMenu {% if classLeftMenuProfiSelected|default %} color3 {% else %} color4 {% endif %}"><i class="fa-solid fa-user"></i>&nbsp Mon profil</a></li>
                         <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-chart-line"></i>&nbsp Mon Dashboard</a></li>
                         <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-envelope"></i>&nbsp Messages</a></li>
                         <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-gear"></i>&nbsp Parametres</a></li>
                     {% endif %}
-                <li><a {% if auth != false %}onClick="return confirm('Etes-vous sur ?')"{% endif %} href="{{ path('app_logout') }}" id="{% if auth != false %}logout{% else %}login1{% endif %}" class="alignItemBaseline flex color4"><i class="fa fa-power-off"></i>{% if auth != false %}&nbsp Deconnection{% else %}&nbsp Se connecter{% endif %}</a></li>
+                    <li><a {% if auth != false %}onClick="return confirm('Etes-vous sur ?')"{% endif %} href="{{ path('app_logout') }}" id="{% if auth != false %}logout{% else %}login1{% endif %}" class="alignItemBaseline flex color4"><i class="fa fa-power-off"></i>{% if auth != false %}&nbsp Deconnexion{% else %}&nbsp Se connecter{% endif %}</a></li>
                 </ul>
             </nav>
         </div>
@@ -56,35 +56,38 @@
                     </div>
                     <h2 class="fontSize4 fontProject color3">{{ user.firstname|capitalize }} {{ user.name|capitalize }}</h2>&nbsp &nbsp &nbsp
                     {% if user.isverified == false %}
-                        <h2 class="alignSelfCenter colorRed fontSize3 fontProject"><i class="fa-solid fa-xmark"></i>&nbsp Profil non verifié
+                        <div class="flex">
+                            <h2 class="alignSelfCenter colorRed fontSize3 fontProject"><i class="fa-solid fa-xmark"></i>&nbsp Profil non verifié
                             {% if auth != false and user.id == auth.id %}
-                                &nbsp &nbsp<a {#title="Renvoyer un lien de verification"#} aria-label="Renvoyer un lien de verification" class="bubble-info repeat fontSize3 color31" href="{{ path('app_newlink_email', { id: auth.id }) }}"><i class="fa-solid fa-arrow-rotate-right"></i></a>
+                                &nbsp &nbsp<a {#title="Renvoyer un lien de verification"#} aria-label="Renvoyer un lien de verification" class="repeat bubble-info fontSize3 color31" href="{{ path('app_newlink_email', { id: auth.id }) }}"><i class="fa-solid fa-arrow-rotate-right"></i></a>
+                        
                             {% endif %}
-                        </h2>
+                            </h2>
+                        </div>
                     {% else %}
                         <i class="alignSelfCenter colorGreen fa-solid fa-check"></i>
                     {% endif %}
                 </div>
                 <div id="partRightRow" class="fontProject marginTop1 paddingRight1 flex flexRow justifyAround">
-                    <div class="pastille marginAuto flex alignItemCenter border borderSmall borderColorLightGrey borderRadius1 padding05 paddingLeft1 paddingRight1 color4">
+                    <div class="btnUpload marginAuto flex alignItemCenter border borderSmall borderColorLightGrey borderRadius1 padding05 paddingLeft1 paddingRight1 color4">
                         <p>Amateur</p>
                     </div>
-                    <div class="pastille marginAuto flex alignItemCenter border borderSmall borderColorLightGrey borderRadius1 padding05 paddingLeft1 paddingRight1 color4">
+                    <div class="btnUpload marginAuto flex alignItemCenter border borderSmall borderColorLightGrey borderRadius1 padding05 paddingLeft1 paddingRight1 color4">
                         <p>50 amis</p>
                     </div>
-                    <div id="pastilleAddHover" class="pastille backColorProject1 marginAuto flex alignItemCenter border borderSmall borderColorProject1 borderRadius1 padding05 paddingLeft1 paddingRight1 colorWhite">
+                    <div class="btnUpload backColorProject1 marginAuto flex alignItemCenter border borderSmall borderColorProject1 borderRadius1 padding05 paddingLeft1 paddingRight1 colorWhite">
                         <a><i class="fa-solid fa-plus"></i>&nbsp Demande d'ami</a>
                     </div>
                 </div>
             </div>
-            <div class="">
+            <div>
                 <nav class="color1 paddingLeft1">
                     <ul id="navProfil" class="maj fontSize3 fontProject flex justifyAround">
-                        <li><a href="{{ path('user_profil', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedProfil is defined %} {{ classSelectedProfil }} {% endif %}">Fil d'actualités</a></li>
-                        <li><a href="{{ path('user_media', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedMedia is defined %} {{ classSelectedMedia }} {% endif %}">Medias</a></li>
-                        <li><a href="{{ path('user_event', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedEvent is defined %} {{ classSelectedEvent }} {% endif %}">Evenements</a></li>
-                        <li><a href="{{ path('user_info', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedInfo is defined %} {{ classSelectedInfo }} {% endif %}">Profil</a></li>
-                        <li><a href="{{ path('user_contact', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedContact is defined %} {{ classSelectedContact }} {% endif %}">Contact</a></li>
+                        <li><a href="{{ path('index', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedProfil is defined %} {{ classSelectedProfil }} {% endif %}">Fil d'actualités</a></li>
+                        <li><a href="{{ path('media', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedMedia is defined %} {{ classSelectedMedia }} {% endif %}">Medias</a></li>
+                        <li><a href="{{ path('event', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedEvent is defined %} {{ classSelectedEvent }} {% endif %}">Evenements</a></li>
+                        <li><a href="{{ path('info', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedInfo is defined %} {{ classSelectedInfo }} {% endif %}">Profil</a></li>
+                        <li><a href="{{ path('contact', { id: user.id }) }}" class="borderBottom padding1 borderExtraMiddle borderColor0 color2 menuProfil {% if classSelectedContact is defined %} {{ classSelectedContact }} {% endif %}">Contact</a></li>
                     </ul>
                 </nav>
             </div>

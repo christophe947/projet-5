@@ -1,0 +1,64 @@
+{% extends 'templateProfil.html.twig' %}
+
+{% block title %}Media {{ user.firstname }}{% endblock %}
+
+{% block titleProfil %}
+{% endblock %}
+
+{% block Profil %}
+    {% if auth != false and user.id == auth.id %}
+        <div id="portalUploadPicture" class="marginTop2 fontProject color3 flex flexColumn paddingLeft3 marginLeft5">
+            <h1 class="fontSize4 fontProject color1">Mettez a jour votre musique :</h1>
+
+            <div class="flex flexColumn">
+                <h1 class="titleMedia">{{ music.title }}</h1> 
+                <audio controls class="border borderRadius015 borderColorMusic">
+	                <source src="{{ asset( url ~ '/' ~ music.filename ) }}" type="audio/mpeg">
+	                <source src="{{ asset( url ~ '/' ~ music.filename ) }}" type="audio/ogg">
+	                Votre navigateur ne supporte pas la balise audio.
+                </audio>  
+            </div>
+            <small class="marginBottom1 color31">( musique en cour de modification : )</small>
+            {{ form_start(form) }}
+            <div class="alignItemBaseline flex marginBottom05">
+                <label>
+                    {{ form_label(form.album)}}
+                    &nbsp
+                </label>
+                {{ form_widget(form.album, {'attr': {'class': 'input3 fontSize2 backColorWhite textAlignCenter border borderLight borderColorLightGrey color31'}}) }}
+            </div> 
+                <div class="alignItemBaseline flex marginBottom05">
+                    <label>
+                        {{ form_label(form.title)}}
+                        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    </label>
+                    {{ form_widget(form.title, {'attr': {'class': 'input3 fontSize2 textAlignCenter border borderLight borderColorLightGrey color31'}}) }}
+                </div>
+                <div class="error3 fontProject colorRed">
+                    {{ form_errors(form.title)}}
+                </div>
+
+                <div class="alignItemBaseline flex marginBottom1">
+                    <label>
+                        {{ form_label(form.description)}}
+                        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  
+                    </label>
+                    {{ form_widget(form.description, {'attr': {'style': 'font-family: Montserrat; font-weight: 500;', 'rows': '2', 'placeholder': '( facultatif )', 'class': 'input3 fontSize2 textAlignCenter border borderLight borderColorLightGrey color31'}}) }}
+                </div>
+                <div class="error3 fontProject colorRed">
+                    {{ form_errors(form.description)}}
+                </div>
+
+                <div class="rowForm1 justifyCenter marginTop05">
+                    {{ form_row(form.Upload, {'attr': {'class': 'registerButton3 fontProject fontSize2 colorWhite marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2'}}) }}
+                </div>    
+            {{ form_end(form) }}
+
+            <div class="button1">
+                <a href="{{ path('media', { id: auth.id }) }}">
+                    <button class="padding05 color3">Annuler</button>
+                </a>
+            <div>
+        </div>    
+    {% endif %}
+{% endblock %}

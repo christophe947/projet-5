@@ -1,0 +1,149 @@
+{% extends 'templateProfil.html.twig' %}
+
+{% block title %}Info {{ user.firstname }}{% endblock %}
+
+{% block titleProfil %}
+{% endblock %}
+
+{% block Profil %}
+    <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Photo de Profil :</h1>
+
+    <div class="flex marginTop1 paddingLeft5">
+        
+        <a href="{{ path('app_cropper_util', { id: auth.id }) }}" class ="colorWhite fontProject fontSize2">
+            <div class="btnUpload pastille backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 padding05 paddingLeft1 paddingRight1">
+                <i class="fa-solid fa-plus"></i>&nbsp Choisir une photo de profil
+            </div>
+        </a>
+    </div>
+
+    <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Information :</h1>
+
+
+   
+    
+      
+                    {{ form_start(form, {'attr': {'class': 'form1 flex flexColumn textAlignCenter alignItemCenter justifyCenter'}} ) }}
+    
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.email) }}
+                                &nbsp &nbsp<i class="fa-regular fa-envelope"></i>&nbsp &nbsp &nbsp &nbsp &nbsp
+                            </label>                        
+                            {{ form_widget(form.email, {'attr': {'autofocus': true, 'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}} ) }}
+                        </div>
+                        <div class="error1 fontProject colorRed">
+                            {{ form_errors(form.email) }}
+                        </div>
+                        
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.pseudo) }}
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            </label>                  
+                            {{ form_widget(form.pseudo, {'attr': {'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}}) }}
+                        </div>
+                        <div class="error1 fontProject colorRed">
+                            {{ form_errors(form.pseudo) }}
+                        </div>
+    
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.name) }}
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            </label>                  
+                            {{ form_widget(form.name, {'attr': {'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}}) }}
+                        </div>
+                        <div class="error1 fontProject colorRed">
+                            {{ form_errors(form.name) }}
+                        </div>
+                        
+
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.firstname) }}
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            </label>
+                            {{ form_widget(form.firstname, {'attr': {'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}}) }}
+                        </div>
+                        <div class="error1 fontProject colorRed">
+                            {{ form_errors(form.firstname) }}
+                        </div>
+                        
+    
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.birthday) }}
+                                &nbsp &nbsp &nbsp
+                            </label>
+                            {{ form_widget(form.birthday, {'attr': {'class': 'inputBirthday fontSize4 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}} ) }}
+                        </div>
+                        <div class="error1 fontProject colorRed">
+                            {{ form_errors(form.birthday) }}
+                        </div>
+
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.country) }}
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            </label>
+                            {{ form_widget(form.country, {'attr': {'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}} ) }}
+                        </div>
+                        <div class="error1 fontProject colorRed">
+                            {{ form_errors(form.country) }}
+                        </div>
+
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.city) }}
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            </label>
+                            {{ form_widget(form.city, {'attr': {'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}} ) }}
+                        </div>
+                        <div class="error1 fontProject colorRed">
+                            {{ form_errors(form.city) }}
+                        </div>
+
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.street) }}
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            </label>
+                            {{ form_widget(form.street, {'attr': {'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}} ) }}
+                        </div>
+                        <div class="error1 fontProject colorRed">
+                            {{ form_errors(form.street) }}
+                        </div>
+
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.info) }}
+                                &nbsp &nbsp &nbsp &nbsp
+                            </label>
+                            {{ form_widget(form.info, {'attr': {'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall borderColorLightGrey borderRadius02 color31'}} ) }}
+                        </div>
+                        <div class="error1 fontProject colorRed">
+                            {{ form_errors(form.info) }}
+                        </div>
+                        
+    
+    
+                        
+                        
+                        
+                        <div class="rowForm1 justifyCenter marginTop05">
+                            {{ form_row(form.valider, {'attr': {'class': 'registerButton2 fontProject fontSize3 padding025 colorWhite marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2'}}) }}
+                        </div>
+                        
+                        <!--<button type="submit" class="">Valider</button>-->
+                        
+                    {{ form_end(form) }}
+                
+            </div>
+            
+        </div>
+        <br>
+        <br>
+    {% endblock %}
+    
+    

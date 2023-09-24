@@ -1,0 +1,79 @@
+{#{% block title %}Media {{ album['0'].albumName }}{% endblock %}#}
+
+<div class="marginLeft5">
+    {% if albumPicture == null and albumVideo == null and albumMusic == null %}
+        <p class="color31 fontProject">Cet album est vide</p>
+    {% endif %}
+
+    {% if albumPicture is defined and albumPicture != null %}
+        <h1 class="fontSize4 color31 fontProject">Images :</h1>
+        <br>
+        <div class="flex flexWrap">
+            {% for results in albumPicture %}
+                <div class="flex flexColumn">    
+                    <a href="{{ asset( urlPicture ~ '/' ~ results.filename ) }}" data-lightbox="lightbox1">
+                        <img class="borderRadius015" src="{{ asset( urlPicture ~ '/' ~ results.filename ) | imagine_filter('my_thumb') }}" >
+                    </a>
+                    <div class="flex justifyAround padding025 backColorLightGrey border borderColorWhite borderRadius015">
+                        <a class="butHov color31" href="{{ path('update_picture', { id: user.id, picture : results.id }) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="butHov color31" href="{{ path('delete_picture', { id: user.id, picture : results.id }) }}" onClick="return confirm('Attention la photo sera supprimé egalement des albums !')"><i class="fa-solid fa-x"></i></a>
+                    </div>
+                </div>
+                &nbsp &nbsp
+            {% endfor %}
+        </div>
+    {% endif %}
+    <br>
+
+    {% if albumVideo is defined and albumVideo != null %}
+        <h1 class="fontSize4 color31 fontProject">Videos :</h1>
+        <div class="flex flexWrap alignTest">
+            {% for results in albumVideo %}
+                <div class="flex flexColumn">
+                    <div class="flex flexColumn textAlignCenter alignItemCenter marginBottom05">
+                        <h1 class="titleMedia">{{ results.title }}</h1>
+                        <div class="presentMediaVideo test55 border borderRadius02">
+                            {{ results.url|striptags('<iframe>')|raw }}
+                        </div>
+                    </div>
+                    <div class="flex justifyAround padding025 backColorLightGrey border borderColorWhite borderRadius015">
+                        <a class="butHov color31" href="{{ path('update_video', { id: user.id, video : results.id }) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="butHov color31" href="{{ path('delete_video', { id: user.id, video : results.id }) }}" onClick="return confirm('Attention la video sera supprimé egalement des albums !')"><i class="fa-solid fa-x"></i></a>  
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if albumMusic is defined and albumMusic != null %}
+        <h1 class="fontSize4 color31 fontProject">Musique :</h1>
+        <br>
+        <div class="flex flexWrap alignTest">
+            {% for results in albumMusic %}
+                <div class="flex flexColumn">
+                    <div class="flex flexColumn textAlignCenter alignItemCenter">  
+                        <h1 class="titleMedia">{{ results.title }}</h1> 
+                        <audio controls class="border borderRadius015 borderColorMusic marginBottom05">
+                            <source src="{{ asset( urlMusic ~ '/' ~ results.filename ) }}" type="audio/mpeg">
+                            <source src="{{ asset( urlMusic ~ '/' ~ results.filename ) }}" type="audio/ogg">
+                            Votre navigateur ne supporte pas la balise audio.
+                        </audio>  
+                    </div>
+                    <div class="flex justifyAround padding025 backColorLightGrey border borderColorWhite borderRadius015">
+                        <a class="butHov color31" href="{{ path('update_music', { id: user.id, music : results.id }) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="butHov color31" href="{{ path('delete_music', { id: user.id, music : results.id }) }}" onClick="return confirm('Attention la musique sera supprimé egalement des albums !')"><i class="fa-solid fa-x"></i></a>
+                    </div>
+                </div>
+        &nbsp &nbsp
+                {#<div>   
+                    <audio controls>
+                        <source src="{{ asset( urlMusic ~ '/' ~ results.filename ) }}" type="audio/mpeg">
+                        <source src="{{ asset( urlMusic ~ '/' ~ results.filename ) }}" type="audio/ogg">
+                        Votre navigateur ne supporte pas la balise audio.
+                    </audio>  
+                </div>
+                &nbsp &nbsp##}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

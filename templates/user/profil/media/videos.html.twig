@@ -1,0 +1,24 @@
+{% block titleProfil %}
+{% endblock %}
+<br>
+<div class="marginLeft5 flex flexWrap alignTest">
+    {% if mediaVideo == null %}
+        <p class="emptyMediaVideo color31 fontProject">Il n'ya aucune video a afficher</p>
+    {% endif %}
+    {% for videos in mediaVideo %}
+        <div class="flex flexColumn">
+            <div class="flex flexColumn textAlignCenter alignItemCenter marginBottom05">
+                <h1 class="titleMedia">{{ videos.title }}</h1>
+                <div class="presentMediaVideo test55 border borderRadius02">
+                    {{ videos.url|striptags('<iframe>')|raw }}
+                </div>
+            </div>
+            <div class="flex justifyAround padding025 backColorLightGrey border borderColorWhite borderRadius015">
+                <a class="butHov color31" href="{{ path('update_video', { id: user.id, video : videos.id }) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a class="butHov color31" href="{{ path('delete_video', { id: user.id, video : videos.id }) }}" onClick="return confirm('Attention la video sera supprimé egalement des albums !')"><i class="fa-solid fa-x"></i></a>  
+            </div>
+        </div>
+    {% endfor %} 
+</div>
+
+

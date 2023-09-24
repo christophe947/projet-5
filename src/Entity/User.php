@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use App\Traits\TimeStampTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -53,9 +56,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $status = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $googleId = null;           //google
+    private ?string $googleId = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class, orphanRemoval: true)]
+    private Collection $video;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Picture::class, orphanRemoval: true)]
+    private Collection $picture;
+    
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Music::class, orphanRemoval: true)]
+    private Collection $music;
+    
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Album::class/*, orphanRemoval: true*/)]
+    private Collection $album;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $country = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $city = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $info = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $street = null;
 
     
+
+    
+    public function __construct()
+    {
+        $this->video = new ArrayCollection();
+        $this->picture = new ArrayCollection();
+        $this->album = new ArrayCollection();
+        $this->music = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -210,5 +246,175 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Video>
+     */
+    public function getVideo(): Collection
+    {
+        return $this->video;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->video->contains($video)) {
+            $this->video->add($video);
+            $video->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->video->removeElement($video)) {
+            // set the owning side to null (unless already changed)
+            if ($video->getUser() === $this) {
+                $video->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Picture>
+     */
+    public function getPicture(): Collection
+    {
+        return $this->picture;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->picture->contains($picture)) {
+            $this->picture->add($picture);
+            $picture->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->picture->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getUser() === $this) {
+                $picture->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+     /**
+     * @return Collection<int, Music>
+     */
+    public function getMusic(): Collection
+    {
+        return $this->music;
+    }
+
+    public function addMusic(Music $music): self
+    {
+        if (!$this->music->contains($music)) {
+            $this->music->add($music);
+            $music->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusic(Music $music): self
+    {
+        if ($this->music->removeElement($music)) {
+            // set the owning side to null (unless already changed)
+            if ($music->getUser() === $this) {
+                $music->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Album>
+     */
+    public function getAlbum(): Collection
+    {
+        return $this->album;
+    }
+
+    public function addAlbum(Album $album): self
+    {
+        if (!$this->album->contains($album)) {
+            $this->album->add($album);
+            $album->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlbum(Album $album): self
+    {
+        if ($this->album->removeElement($album)) {
+            // set the owning side to null (unless already changed)
+            if ($album->getUser() === $this) {
+                $album->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): static
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): static
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getInfo(): ?string
+    {
+        return $this->info;
+    }
+
+    public function setInfo(?string $info): static
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
+    public function getStreet(): ?string
+    {
+        return $this->street;
+    }
+
+    public function setStreet(?string $street): static
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    
 
 }

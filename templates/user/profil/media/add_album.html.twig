@@ -1,0 +1,40 @@
+{% extends 'templateProfil.html.twig' %}
+
+{% block title %}Media {{ user.firstname }}{% endblock %}
+
+{% block titleProfil %}
+{% endblock %}
+
+{% block Profil %}
+    {% if auth != false and user.id == auth.id %}
+        <div id="portalUploadPicture" class="marginTop2 fontProject color3 flex flexColumn paddingLeft3 marginLeft5">    
+                <h1 class="fontSize4 fontProject color1">Nouvel album :</h1>
+
+                {{ form_start(formAlbum) }}
+                    <div class="alignItemBaseline flex marginBottom05">
+                        <label>
+                            {{ form_label(formAlbum.album_name)}}
+                            &nbsp &nbsp &nbsp
+                        </label>
+                        {{ form_widget(formAlbum.album_name, {'attr': {'autofocus': true, 'class': 'input3 fontSize2 textAlignCenter border borderLight borderColorLightGrey color31'}}) }}
+                    </div>
+                    <div class="error3 fontProject colorRed">
+                        {{ form_errors(formAlbum.album_name)}}
+                    </div>
+                    
+                    <div class="rowForm1 justifyCenter marginTop05">
+                        {{ form_row(formAlbum.Create, {'attr': {'class': 'registerButton3 fontProject fontSize2 colorWhite marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2'}}) }}
+                    </div>
+                {{ form_end(formAlbum) }}
+
+                
+            
+
+
+        <div class="button1">
+            <a href="{{ path( location , { id: auth.id }) }}">
+                <button class="padding05 color3">Annuler</button>
+            </a>
+        </div>    
+    {% endif %}
+{% endblock %}

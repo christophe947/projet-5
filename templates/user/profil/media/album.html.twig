@@ -1,0 +1,49 @@
+{% extends 'templateProfil.html.twig' %}
+
+{% block title %}Media {{ user.firstname }}{% endblock %}
+
+{% block titleProfil %}
+{% endblock %}
+
+{% block Profil %}
+    {% if (auth != false and user.id != auth.id and user.status == 1) or (auth == false and user.status == 1) %}
+        <p class="marginLeft3 color31 fontProject">Ce profil est privé vous ne pouvez acceder au information</p>
+    {% endif %}
+    {% if user.status == 3 or auth != false and user.id == auth.id %}
+        <br>
+        
+            <div class="divBtnUpload flex marginLeft5">
+                <div class="btnUpload backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 padding05 paddingLeft1 paddingRight1">
+                    <a href="{{ path('add_album', { id: auth.id, from: 'albums' }) }}" class ="colorWhite fontProject fontSize3"><i class="fa-solid fa-plus"></i>&nbsp Ajouter un Album</a>
+                </div>
+                &nbsp &nbsp
+                <div class="btnUpload backColorGrey flex alignItemCenter border borderSmall borderColorGrey borderRadius1 padding05 paddingLeft1 paddingRight1">
+                    <a href="{{ path('media', { id: auth.id, from: 'albums' }) }}" class ="colorWhite fontProject fontSize3"><i class="fa-solid fa-arrow-rotate-left"></i>&nbsp Retour</a>
+                </div>
+            </div>
+            
+        
+        <br>
+        <br>
+        <div class="dynamicJs marginLeft5 flex flexWrap">
+            {% for album in albums %}
+                <div class="flex flexColumn">
+                    <button id="id{{ album.id }}" class="class{{ album.id }} loopAlbum testAjax mediaButton color31" href="{{ path('album_render', { id : user.id , albumId : album.id } ) }}">
+                        <i class="fa-solid fa-folder-open fa-2xl"></i>
+                        <p class="fontSize3 fontProject">{{ album.albumName }}</p>
+                    </button>
+                    <div class="flex justifyAround padding025 backColorLightGrey border borderColorWhite borderRadius015">
+                        <a class="butHov color31" href="{{ path('delete_album_no_content', { id: user.id, album : album.id }) }}" onClick="return confirm('Etes vous sur ?')"><i class="fa-regular fa-trash-can"></i></a>
+                        <a class="butHov color31" href="{{ path('delete_album_full', { id: user.id, album : album.id }) }}" onClick="return confirm('Attention l\'album ainsi que les elements contenu dans celui-ci seront supprimé definitivement !')"><i class="fa-solid fa-x"></i></a>
+                    </div>
+                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                </div>
+            {% endfor %} 
+        </div>
+        <br>
+        <div id="ajaxDivMedia"></div>
+    {% endif %}
+    <br>
+    <br>
+{% endblock %}
+

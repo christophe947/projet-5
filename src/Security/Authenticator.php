@@ -51,7 +51,7 @@ class Authenticator extends AbstractLoginFormAuthenticator
         if(!empty($user)){
             $id = $user->getId();
         }
-        return new RedirectResponse($this->urlGenerator->generate('user_profil',['id' => $id]));
+        return new RedirectResponse($this->urlGenerator->generate('index',['id' => $id]));
     }
 
 

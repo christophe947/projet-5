@@ -1,0 +1,25 @@
+{% block titleProfil %}
+{% endblock %}
+<br>
+<div class="marginLeft5 flex flexWrap alignTest">
+    {% if mediaMusic == null %}
+        <p class="emptyMediaMusic color31 fontProject">Il n'ya aucune musique a afficher</p>
+    {% endif %}
+    {% for musics in mediaMusic %}
+        <div class="flex flexColumn">
+            <div class="flex flexColumn textAlignCenter alignItemCenter">  
+                <h1 class="titleMedia">{{ musics.title }}</h1> 
+                <audio controls class="border borderRadius015 borderColorMusic marginBottom05">
+                    <source src="{{ asset( urlMusic ~ '/' ~ musics.filename ) }}" type="audio/mpeg">
+                    <source src="{{ asset( urlMusic ~ '/' ~ musics.filename ) }}" type="audio/ogg">
+                    Votre navigateur ne supporte pas la balise audio.
+                </audio>  
+            </div>
+            <div class="flex justifyAround padding025 backColorLightGrey border borderColorWhite borderRadius015">
+                <a class="butHov color31" href="{{ path('update_music', { id: user.id, music : musics.id }) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a class="butHov color31" href="{{ path('delete_music', { id: user.id, music : musics.id }) }}" onClick="return confirm('Attention la musique sera supprimé egalement des albums !')"><i class="fa-solid fa-x"></i></a>
+            </div>
+        </div>
+        &nbsp &nbsp
+    {% endfor %} 
+</div>

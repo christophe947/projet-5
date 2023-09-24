@@ -24,8 +24,6 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class RegistrationController extends AbstractController
 {
     
-    //private EmailVerifier $emailVerifier;
-
     
     public function __construct(private EmailVerifier $emailVerifier, private Security $security)
     {
@@ -56,7 +54,7 @@ class RegistrationController extends AbstractController
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
-            $this->addFlash('success', "Votre enregistrement est bien pris en compte, reste a confirmer votre email");
+            $this->addFlash('success', "Votre enregistrement est bien pris en compte, il vous reste a verifier votre email");
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
@@ -88,7 +86,7 @@ class RegistrationController extends AbstractController
             $auth->setRoles($roles);
             $this->addFlash('success', 'Bravo compte verifié');
             if ($idEmail && ($this->security->getUser() !== null)) {
-                return $this->redirectToRoute('user_profil', ['id' => $idEmail]);
+                return $this->redirectToRoute('index', ['id' => $idEmail]);
             } else {
                 return $this->redirectToRoute('app_login');
             }
@@ -109,22 +107,27 @@ class RegistrationController extends AbstractController
     }
 
     
-    #[Route('/newlink/send/{id}', name: 'send_newlink')]    //action de renvoiyer lemail et retourner au profil
+    #[Route('/newlink/send/{id}', name: 'send_newlink')]    //action de renvoiyer l'email et retourner au profil siil existe
     public function sendNewlink(Request $request, UserRepository $userRepository): Response
     {
         $idCreate = $request->attributes;
         $id = $idCreate->get('id');
         $user = $userRepository->find($id);
-        
-        $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-            (new TemplatedEmail())
-                ->from(new Address('christophe.test.dev@gmail.com', 'Christophe Projet Symfony 6'))
-                ->to($user->getEmail())
-                ->subject('Please Confirm your Email')
-                ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
-        $this->addFlash('info', "Un nouveau lien a été envoyer");
-        return  $this->redirectToRoute('user_profil', ['id' => $id]);    
+
+        if ($user) {
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('christophe.test.dev@gmail.com', 'Christophe Projet Symfony 6'))
+                    ->to($user->getEmail())
+                    ->subject('Please Confirm your Email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                );
+            $this->addFlash('info', "Un nouveau lien a été envoyer");
+            return  $this->redirectToRoute('index', ['id' => $id]);    
+        } else {
+            $this->addFlash('error', "Ce profil n'existe pas ou plus");
+            return  $this->redirectToRoute('app_login');
+        }
     }
 
 

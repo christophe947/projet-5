@@ -116,7 +116,7 @@ class GoogleAuthenticator extends OAuth2Authenticator
         $user = $this->security->getUser();
         $id = $user->getId();
         return new RedirectResponse(
-            $this->router->generate('user_profil', ['id' => $id])
+            $this->router->generate('index', ['id' => $id])
         );
     }
 

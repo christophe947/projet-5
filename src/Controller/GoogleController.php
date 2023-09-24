@@ -31,9 +31,7 @@ class GoogleController extends AbstractController
     #[Route('/associate/google', name: 'associate_google')]
     public function associateAction(Request $request, ClientRegistry $clientRegistry)
     {
-        
         $session = $request->getSession();
-        //$this->addFlash('success', 'Votre comtpe est asocié avec google');
         $session->set('associate', '1');
         //Redirect to google
         return $clientRegistry->getClient('google_main')->redirect([], []);

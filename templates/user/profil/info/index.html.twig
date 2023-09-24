@@ -1,0 +1,41 @@
+{% extends 'templateProfil.html.twig' %}
+
+{% block title %}Media {{ user.firstname }}{% endblock %}
+
+{% block titleProfil %}
+{% endblock %}
+
+{% block Profil %}
+    {% if auth != false and user.id == auth.id %}
+        <div class="flex marginTop1 paddingLeft5">
+            <a href="{{ path('info_update', { id: auth.id }) }}" class ="colorWhite fontProject fontSize2">
+                <div class="btnUpload pastille backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 padding05 paddingLeft1 paddingRight1">
+                    <i class="fa-solid fa-plus"></i>&nbsp Editer mon profil
+                </div>
+            </a>
+        </div>
+    {% endif %}
+    {% if (auth != false and user.id != auth.id and user.status == 1) or (auth == false and user.status == 1) %}
+        <p class="marginLeft3 color31 fontProject">Ce profil est privé vous ne pouvez acceder au information</p>
+    {% endif %}
+    {% if user.status == 3 or auth != false and user.id == auth.id %}
+        
+        <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Information :</h1>
+    
+        <div class="paddingLeft5 fontProject color31"> {# color4/31 resultalt #}
+            <p><strong class="fontProject color3">Prenom :&nbsp &nbsp</strong> {{ user.firstname|capitalize }}</p>
+            <p><strong class="fontProject color3">Nom :&nbsp &nbsp</strong> {{ user.name|capitalize }}</p>
+            <p><strong class="fontProject color3">Anniversaire :&nbsp &nbsp</strong> {{ user.birthday|date("d/m/Y") }}
+            <p><strong class="fontProject color3">Pseudo :&nbsp &nbsp</strong> {{ (user.pseudo != null) ? user.pseudo : '<em class="colorLightGrey">champ à renseigner</em>' }}</p>
+            <p><strong class="fontProject color3">Email :&nbsp &nbsp</strong> {{ user.email|capitalize }}</p>
+            <p><strong class="fontProject color3">Role :&nbsp &nbsp</strong> {% if (user.roles.0 == "ROLE_USER") %} Utilisateur simple {% elseif (user.roles.0 == "ROLE_ADMIN") %} Administrateur {% elseif (user.roles.0 == "ROLE_SUPER_ADMIN") %} Chef Administrateur {% endif %}</p>
+            <p><strong class="fontProject color3">Visibilité :&nbsp &nbsp</strong> {% if (user.status == 1) %} Privé {% elseif (user.status == 2 ) %} Public {% elseif (user.status == 3 ) %} Amis seulement {% endif %}</p>
+            <p><strong class="fontProject color3">Pays :&nbsp &nbsp</strong> {{ (user.country != null) ? user.country|capitalize : '<em class="colorLightGrey">champ à renseigner</em>' }}</p>
+            <p><strong class="fontProject color3">Ville :&nbsp &nbsp</strong> {{ (user.city != null) ? user.city|capitalize : '<em class="colorLightGrey">champ à renseigner</em>' }}</p>
+            <p><strong class="fontProject color3">Adresse :&nbsp &nbsp</strong> {{ (user.street != null) ? user.street|capitalize : '<em class="colorLightGrey">champ à renseigner</em>' }}</p> {# numberstreet is private use for localise #}
+            <p><strong class="fontProject color3">Information :&nbsp &nbsp</strong> {{ (user.info != null) ? user.info|capitalize : '<em class="colorLightGrey">champ à renseigner</em>' }}</p>
+            <p><strong class="fontProject color3">Verifié :&nbsp &nbsp</strong> {{ (user.isverified == "1") ? '&nbsp<em class="alignSelfCenter colorGreen fontSize3 fontProject"><i class="alignSelfCenter fa-solid fa-check"></i>&nbsp Profil verifié</em>' : '&nbsp<em class="alignSelfCenter colorRed fontSize3 fontProject"><i class="fa-solid fa-xmark"></i>&nbsp Profil non verifié</em>' }}</p>
+        </div>
+            {% endif %}
+    
+{% endblock %}

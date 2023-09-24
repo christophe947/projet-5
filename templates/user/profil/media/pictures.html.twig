@@ -1,0 +1,20 @@
+{% block titleProfil %}
+{% endblock %}
+<br>
+<div class="marginLeft5 flex flexWrap">
+    {% if mediaPicture == null %}
+        <p class="color31 fontProject">Il n'ya aucune images a afficher</p>
+    {% endif %}
+    {% for pictures in mediaPicture %}
+        <div class="flex flexColumn">    
+            <a href="{{ asset( url ~ '/' ~ pictures.filename ) }}" data-lightbox="lightbox1">
+                <img class="borderRadius015" src="{{ asset( url ~ '/' ~ pictures.filename ) | imagine_filter('my_thumb') }}" >
+            </a>
+            <div class="flex justifyAround padding025 backColorLightGrey border borderColorWhite borderRadius015">
+                <a class="butHov color31" href="{{ path('update_picture', { id: user.id, picture : pictures.id }) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a class="butHov color31" href="{{ path('delete_picture', { id: user.id, picture : pictures.id }) }}" onClick="return confirm('Attention la photo sera supprimé egalement des albums !')"><i class="fa-solid fa-x"></i></a>
+            </div>
+        </div>
+        &nbsp &nbsp
+    {% endfor %} 
+</div>

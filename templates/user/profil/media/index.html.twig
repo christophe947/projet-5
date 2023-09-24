@@ -1,0 +1,76 @@
+{% extends 'templateProfil.html.twig' %}
+
+{% block title %}Media {{ user.firstname }}{% endblock %}
+
+{% block titleProfil %}
+{% endblock %}
+
+{% block Profil %}
+    
+    {% if auth != false and user.id == auth.id %}
+        <br>
+        <div class="divBtnUpload flex justifyAround marginLeft2">
+            <a href="{{ path('add_picture', { id: auth.id }) }}" class ="colorWhite fontProject fontSize2">
+                <div  class="btnUpload backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 padding05 paddingLeft1 paddingRight1">
+                    <i class="fa-solid fa-plus"></i>&nbsp Ajouter une photo
+                </div>
+            </a>
+            
+            <a href="{{ path('add_video', { id: auth.id }) }}" class ="colorWhite fontProject fontSize2">
+                <div class="btnUpload pastille backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 padding05 paddingLeft1 paddingRight1">
+                    <i class="fa-solid fa-plus"></i>&nbsp Ajouter une video
+                </div>
+            </a>
+            
+            <a href="{{ path('add_music', { id: auth.id }) }}" class ="colorWhite fontProject fontSize2">
+                <div class="btnUpload pastille backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 padding05 paddingLeft1 paddingRight1">
+                    <i class="fa-solid fa-plus"></i>&nbsp Ajouter une musique
+                </div>
+            </a>
+            
+        </div>
+        <br>
+    {% endif %}
+  
+
+    {% if (auth != false and user.id != auth.id and user.status == 1) or (auth == false and user.status == 1) %}
+        <p class="marginLeft3 color31 fontProject">Ce profil est privé vous ne pouvez acceder au information</p>
+    {% endif %}
+    {% if user.status == 3 or auth != false and user.id == auth.id %}
+        <br>
+        <div class="marginLeft5 flex flexWrap">  
+            
+            <button id="pic" class="testAjax mediaButton color31" href="{{ path('pictures', { id: user.id }) }}">
+                <i class="fa-regular fa-image fa-2xl"></i>
+                <p class="testPicture fontSize3 fontProject">Photos</p>
+            </button>
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+
+            <button id="vid" class="testAjax mediaButton color31" href="{{ path('videos', { id: user.id }) }}"> 
+                <i class="fa-solid fa-camera-retro fa-2xl"></i>
+                <p class="fontSize3 fontProject">Videos</p> 
+            </button>
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+
+            <button id="mus" class="testAjax mediaButton color31" href="{{ path('musics', { id: user.id }) }}">
+                <i class="fa-solid fa-music fa-2xl"></i>
+                <p class="fontSize3 fontProject">Musiques</p>
+            </button>
+            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+
+            <a href="{{ path('albums', { id: user.id }) }}"> 
+                <button id="alb" class="mediaButton color31">
+                    <i class="fa-solid fa-list fa-2xl"></i>
+                    <p class="fontSize3 fontProject">Albums</p>
+                </button> 
+            </a>     
+        </div>
+        <br>
+        <div id="ajaxDivMedia">
+            
+        </div>
+    
+    {% endif %}
+    
+    
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'templateProfil.html.twig' %}
+
+{% block title %}Media {{ user.firstname }}{% endblock %}
+
+{% block titleProfil %}
+{% endblock %}
+
+{% block Profil %}
+    {% if auth != false and user.id == auth.id %}
+        <div id="portalUploadPicture" class="marginTop2 fontProject color3 flex flexColumn paddingLeft3 marginLeft5">
+            <h1 class="fontSize4 fontProject color1">Telecharger vos musique :</h1>
+
+            <small class="marginBottom1 color31">(Fichier au format mp3 / ...)</small>
+
+            {{ form_start(form) }}
+                <div class="alignItemBaseline flex marginBottom05">
+                    <label>
+                        {{ form_label(form.album)}}
+                        &nbsp &nbsp
+                    </label>
+                    {{ form_widget(form.album, {'attr': {'class': 'input3 fontSize2 backColorWhite textAlignCenter border borderLight borderColorLightGrey color31'}}) }}
+                </div>    
+                <div class="marginBottom1 flex flexColumn">
+                    <p><a href="{{ path('add_album', { id: auth.id, from: 'add_music' }) }}">Cliquer ici pour creer un nouvel album</a></p>
+                </div>  
+
+                
+
+                
+
+                <div class="alignItemBaseline flex marginBottom05">
+                    <label>
+                        {{ form_label(form.music)}}
+                        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    </label>
+                    {{ form_widget(form.music, {'attr': {'autofocus': true, 'class': 'input3 fontSize2 textAlignCenter border borderLight borderColorLightGrey color31'}}) }}
+                </div>
+                <div class="error3 fontProject colorRed">
+                    {{ form_errors(form.music)}}
+                </div>
+
+                <div class="alignItemBaseline flex marginBottom05">
+                    <label>
+                        {{ form_label(form.title)}}
+                        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    </label>
+                    {{ form_widget(form.title, {'attr': {'class': 'input3 fontSize2 textAlignCenter border borderLight borderColorLightGrey color31'}}) }}
+                </div>
+                <div class="error3 fontProject colorRed">
+                    {{ form_errors(form.title)}}
+                </div>
+
+                <div class="alignItemBaseline flex marginBottom1">
+                    <label>
+                        {{ form_label(form.description)}}
+                        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  
+                    </label>
+                    {{ form_widget(form.description, {'attr': {'style': 'font-family: Montserrat; font-weight: 500;', 'rows': '2', 'placeholder': '( facultatif )', 'class': 'input3 fontSize2 textAlignCenter border borderLight borderColorLightGrey color31'}}) }}
+                </div>
+                    
+                <div class="error3 fontProject colorRed">
+                    {{ form_errors(form.description)}}
+                </div>
+
+                <div class="rowForm1 justifyCenter marginTop05">
+                    {{ form_row(form.Upload, {'attr': {'class': 'registerButton3 fontProject fontSize2 colorWhite marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2'}}) }}
+                </div>
+                    
+            {{ form_end(form) }}
+            <div class="button1">
+                <a href="{{ path('media', { id: auth.id }) }}">
+                    <button name="uploadMusic" value="0" class="padding05 color3">Annuler</button>
+                </a>
+            <div>
+        </div>
+    {% endif %}
+{% endblock %}
