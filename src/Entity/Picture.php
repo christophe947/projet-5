@@ -49,6 +49,9 @@ class Picture
     #[ORM\JoinColumn(nullable: true /*, onDelete: 'cascade'*/)]
     private ?Album $album = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $profil = null;
+
     
 
     
@@ -137,6 +140,18 @@ class Picture
     public function setAlbum(?Album $album): self
     {
         $this->album = $album;
+
+        return $this;
+    }
+
+    public function isProfil(): ?bool
+    {
+        return $this->profil;
+    }
+
+    public function setProfil(?bool $profil): static
+    {
+        $this->profil = $profil;
 
         return $this;
     }

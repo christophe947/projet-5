@@ -33,4 +33,5 @@ import 'lightbox2/dist/css/lightbox.min.css';
 //});
 
 
-console.log('hello world');
+//console.log('hello world');
+

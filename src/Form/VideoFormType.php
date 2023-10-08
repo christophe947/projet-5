@@ -62,7 +62,7 @@ class VideoFormType extends AbstractType
             ->add('created_at', HiddenType::class)
             ->add('updated_at', HiddenType::class)
             ->add('Upload', SubmitType::class, [
-                'label' => 'Telecharger',              
+                'label' => 'Telecharger'      
             ])
         ;
     }

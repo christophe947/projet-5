@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "094cc6f4d497e3e775d6b3447ebbcf4e",
+    "content-hash": "b73b4f20f97a4fad611942ef6a01ac87",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -7703,7 +7703,7 @@
         },
         {
             "name": "symfony/ux-cropperjs",
-            "version": "v2.11.1",
+            "version": "v2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-cropperjs.git",
@@ -7767,7 +7767,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-cropperjs/tree/v2.11.1"
+                "source": "https://github.com/symfony/ux-cropperjs/tree/v2.12.0"
             },
             "funding": [
                 {

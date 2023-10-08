@@ -6,15 +6,22 @@
 {% endblock %}
 
 {% block Profil %}
+    {% if auth != false and user.id == auth.id %}
     <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Photo de Profil :</h1>
 
     <div class="flex marginTop1 paddingLeft5">
         
-        <a href="{{ path('app_cropper_util', { id: auth.id }) }}" class ="colorWhite fontProject fontSize2">
-            <div class="btnUpload pastille backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 padding05 paddingLeft1 paddingRight1">
-                <i class="fa-solid fa-plus"></i>&nbsp Choisir une photo de profil
-            </div>
-        </a>
+        <button class="testAjax btnUpload pastille backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 fontProject fontSize2 padding1 paddingLeft1 paddingRight1 colorWhite" href="{{ path('pictures_profil', { id: user.id }) }}">
+            {#<a href="{{ path('app_cropper_util', { id: auth.id }) }}" class ="colorWhite fontProject fontSize2">#}
+                
+                    <i class="fa-solid fa-plus"></i>&nbsp Choisir une photo de profil
+                
+            {#</a>#}
+        </button>
+    
+    </div>
+    <div id="ajaxDivMedia">
+            
     </div>
 
     <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Information :</h1>
@@ -144,6 +151,7 @@
         </div>
         <br>
         <br>
+    {% endif %}
     {% endblock %}
     
     

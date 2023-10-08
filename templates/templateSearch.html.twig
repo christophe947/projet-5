@@ -1,0 +1,56 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+<div id="page" class="flex flexRow">
+    <div id="blockLeft" class="fixed textAlignCenter borderRight borderLight borderColorLightGrey">
+        <div id="logoApp" class="flex alignItemCenter"><!--justifyCenter -->
+            <a href="#">
+                <img id="logo" class="flex relative" src="{{ asset('assets/images/Hand-drawn-trumpet-logo-by-yahyaanasatokillah-580x387.jpg') }}">
+            </a>
+        </div>
+        <hr>
+        <div class="marginTop2">
+            <nav class="textAlignStart">
+                <h2 class="titleMenu fontSize3 color1 fontProject maj">Menu</h2>
+
+                <ul id="leftMenu" class="fontProject flex flexColumn">
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-earth-americas"></i>&nbsp &nbsp Decouvrir</a></li>
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-magnifying-glass"></i>&nbsp &nbsp Rechercher</a></li>
+                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-users-line"></i>&nbsp &nbsp Mes amis</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div>
+            <nav class="textAlignStart">
+                <h2 class="titleMenu fontSize3 color1 fontProject maj">Vos informations</h2>
+
+                <ul id="leftMenu" class="fontProject flex flexColumn">
+                    {% if auth != false %}
+                        <li><a href="{{ path('index', { id: auth.id }) }}" class="alignItemBaseline flex leftMenu {% if classLeftMenuProfiSelected|default %} color3 {% else %} color4 {% endif %}"><i class="fa-solid fa-user"></i>&nbsp Mon profil</a></li>
+                        <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-chart-line"></i>&nbsp Mon Dashboard</a></li>
+                        <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-envelope"></i>&nbsp Messages</a></li>
+                        <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-gear"></i>&nbsp Parametres</a></li>
+                    {% endif %}
+                    <li><a {% if auth != false %}onClick="return confirm('Etes-vous sur ?')"{% endif %} href="{{ path('app_logout') }}" id="{% if auth != false %}logout{% else %}login1{% endif %}" class="alignItemBaseline flex color4"><i class="fa fa-power-off"></i>{% if auth != false %}&nbsp Deconnexion{% else %}&nbsp Se connecter{% endif %}</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div id="blockCenter">
+        
+        {% block titleSearch %}
+                Search Title
+        {% endblock %}
+
+            {% block Search %}
+                Search Body
+            {% endblock %}
+    </div>
+</div>
+
+{% endblock %}

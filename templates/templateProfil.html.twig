@@ -19,7 +19,7 @@
 
                 <ul id="leftMenu" class="fontProject flex flexColumn">
                     <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-earth-americas"></i>&nbsp &nbsp Decouvrir</a></li>
-                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-magnifying-glass"></i>&nbsp &nbsp Rechercher</a></li>
+                    <li><a href="{{ path('search', { id: auth.id }) }}" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-magnifying-glass"></i>&nbsp &nbsp Rechercher</a></li>
                     <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-users-line"></i>&nbsp &nbsp Mes amis</a></li>
                 </ul>
             </nav>
@@ -52,7 +52,11 @@
             <div id="rowTop" class="flex flexRow justifyBetween marginBottom1">
                 <div class="flex flexRow">
                     <div id="pictureProfil" class="border borderMiddle borderColorWhite borderRadius1 marginLeft3 relative overflowHidden marginRight2">
-                        <img id="imageCouverture" src="{{ asset('assets/images/no-profile-picture-icon-7.png') }}">
+                        {% if user.getPictureProfil != null %}
+                            <img id="imageCouverture" src="/uploads/pictures/{{user.getPictureProfil().filename}}">
+                        {% else %}
+                            <img id="imageCouverture" src="{{ asset('assets/images/no-profile-picture-icon-7.png') }}">
+                        {% endif %}
                     </div>
                     <h2 class="fontSize4 fontProject color3">{{ user.firstname|capitalize }} {{ user.name|capitalize }}</h2>&nbsp &nbsp &nbsp
                     {% if user.isverified == false %}

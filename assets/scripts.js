@@ -7,7 +7,7 @@ $(function() {
             url: page,
             dataType: "html",
             success: function (data) {
-                jQuery("#ajaxDivMedia").html(data);
+                jQuery("#ajaxDivMedia").html(data)/* || jQuery("#ajaxDivProfil").html(data)*/;
                 //jQuery("#blockPage").style.height = "110% !important";
             },
             error: function () {
@@ -18,13 +18,50 @@ $(function() {
 });
 
 
-if ($(".divBtnUpload").length > 0 ){
+$(function() {
+    if ($(".divBtnUpload").length > 0) {            
+        let searchParams = new URLSearchParams(window.location.search)
+        searchParams.has('origin') 
+        let origin = searchParams.get('origin')
+        console.log(origin);
+        if (origin === "picture" || origin === "album") {
+            $(function (){
+                $("#pic").trigger( "click" );
+            });
+            die();
+        };
+        if (origin === "video") {
+            $(function (){
+                $("#vid").trigger( "click" );
+            });
+            die();
+        };
+        if (origin === "music") {
+            $(function (){
+                $("#mus").trigger( "click" );
+            });
+            die();
+        }
+        else {
+            $(function (){
+                $("#pic").trigger( "click" );
+            });
+            die();
+        }
+    }        
+});
+
+
+
+//$request->query->get('foo');
+/*
+if ($(".divBtnUpload").length > 0 && origin === "video"){
     $(function (){
-        $("#pic").trigger( "click" );
+        $("#mus").trigger( "click" );
        
     });
  };
-
+*/
 
 variable = {
     pictureButton: document.querySelector("#pic"),

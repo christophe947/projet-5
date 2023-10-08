@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Picture;
 use App\Repository\UserRepository;
 use App\Traits\TimeStampTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -82,6 +83,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $street = null;
 
+    #[ORM\OneToOne(orphanRemoval: true)]
+    private ?picture $picture_profil = null;
+
+    /*#[ORM\Column(nullable: true)]
+    private ?int $picture_profil = null;
+*/
     
 
     
@@ -168,7 +175,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(/*string*/ $name): self
     {
         $this->name = $name;
 
@@ -180,7 +187,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(/*string*/ $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -204,7 +211,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->pseudo;
     }
 
-    public function setPseudo(string $pseudo): self
+    public function setPseudo(/*string*/ $pseudo): self
     {
         $this->pseudo = $pseudo;
 
@@ -411,6 +418,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStreet(?string $street): static
     {
         $this->street = $street;
+
+        return $this;
+    }
+
+    public function getPictureProfil(): ?picture
+    {
+        return $this->picture_profil;
+    }
+
+    public function setPictureProfil(?picture $picture_profil): static
+    {
+        $this->picture_profil = $picture_profil;
 
         return $this;
     }

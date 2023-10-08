@@ -1,0 +1,16 @@
+{% block titleProfil %}
+{% endblock %}
+<br>
+<div class="marginLeft5 flex flexWrap">
+    {% if mediaPicture == null %}
+        <p class="color31 fontProject">Il n'ya aucune images a afficher</p>
+    {% endif %}
+    {% for pictures in mediaPicture %}
+        <div class="flex flexColumn">    
+            <a href="{{ path('app_cropper_util', { id: user.id, pictureSend: pictures.filename }) }}">
+                <img class="borderRadius015" src="{{ asset( url ~ '/' ~ pictures.filename ) | imagine_filter('my_thumb') }}" >
+           </a> 
+        </div>
+        &nbsp &nbsp
+    {% endfor %} 
+</div>

@@ -1,7 +1,39 @@
 {% extends 'templateProfil.html.twig' %}
 
-    {% block body %}
-       {{form(form)}}
+{% block title %}Media {{ user.firstname }}{% endblock %}
+
+{% block titleProfil %}{% endblock %}
+
+{% block Profil %}
+        {% if auth != false and user.id == auth.id %}
+            
+            {% if croppedImage is null %}
+                {{ form_start(form) }}
+                    <div class="">
+                        <div class="">{{ form_widget(form) }}</div>
+                        <div class="">
+                            <div id="cropper-preview" style="overflow: hidden;width: 200px;height: 200px;"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="" style="width: 100%;">Crop it!</button>
+                {{ form_end(form) }}
+            {% else %}
+
+                {# show the cropped image after submit! 
+                <div class="">
+                    <div class="">
+                        <figure class="figure">
+                            <img src="{{ croppedImage }}" class="figure-img img-fluid rounded" alt="Cropped image">
+                            <figcaption class="figure-caption">The cropped image.</figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-3">
+                        <figure class="figure">
+                            <img src="{{ croppedThumbnail }}" class="figure-img img-fluid rounded" alt="Cropped thumbnail">
+                            <figcaption class="figure-caption">A thumbnail of the cropped image.</figcaption>
+                        </figure>
+                    </div>
+                </div> #}
+            {% endif %}
+        {% endif %}
     {% endblock %}
-    
-    

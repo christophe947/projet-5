@@ -34,6 +34,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 class MediaController extends AbstractController
 {
     const DIRECTORY_PICTURE = '/uploads/pictures/';
+    //const DIRECTORY_PICTURE_PROFIL = '/uploads/profil_pictures/';
     const DIRECTORY_MUSIC = '/uploads/musics/';
     
     public function __construct(private Security $security, private ManagerRegistry $doctrine) {
@@ -42,14 +43,17 @@ class MediaController extends AbstractController
     private $serverName;
     
     public function getUrlPicture() {
-        return 'http://'. $this->serverName . self::DIRECTORY_PICTURE;
+        return 'https://'. $this->serverName . self::DIRECTORY_PICTURE;
     }
+
+    /*public function getUrlPictureProfil() {
+        return 'https://'. $this->serverName . self::DIRECTORY_PICTURE_PROFIL;
+    }*/
 
     public function getUrlMusic() {
-        return 'http://'. $this->serverName . self::DIRECTORY_MUSIC;
+        return 'https://'. $this->serverName . self::DIRECTORY_MUSIC;
     }
 
-    
     #[Route('/', name: 'media')]
     public function media(User $user = null): Response
     { 
@@ -88,6 +92,29 @@ class MediaController extends AbstractController
             'albums' =>$albums
         ]);
     }
+
+    /*#[Route('/albums/album-profil', name: 'album_render_profil')]
+    public function albumProfil(User $user = null): Response
+    {
+        if (!$user) {
+            $this->addFlash('error', "Personne inconnu");
+            return $this->redirectToRoute('app_not_found');
+        }
+        $urlPictureProfil = $this->getUrlPictureProfil();
+        $auth = $this->security->getUser();
+    
+        $pictureRepository = $this->doctrine->getRepository(Picture::class);
+        $albumPictureProfil = $pictureRepository->findBy(['user' => $user->getId()], ['created_at' => 'DESC', 'profil' => '1']);
+       
+        return $this->render('user/profil/media/album_render_profil.html.twig',[
+            'classLeftMenuProfiSelected' => '1',
+            'classSelectedMedia' => 'menuProfilSelected',
+            'urlPictureProfil' => $urlPictureProfil,
+            'user' => $user,
+            'auth' => $auth,
+            'albumPictureProfil' => $albumPictureProfil
+        ]);
+    }*/
 
     
     #[Route('/album/{albumId}', name: 'album_render')]
@@ -237,6 +264,37 @@ class MediaController extends AbstractController
         return $this->redirectToRoute('albums',['id' => $user->getId()]);    
         
     }
+    
+    #[Route('/pictures-profil', name: 'pictures_album_profil')]
+    public function pictureProfil(User $user = null): Response
+    {
+        if (!$user) {
+            $this->addFlash('error', "Personne inconnu");
+            return $this->redirectToRoute('app_not_found');
+        }
+        $url = $this->getUrlPicture();
+
+        $pictureRepository = $this->doctrine->getRepository(Picture::class);
+        $mediaPicture = $pictureRepository->findBy(
+            [
+                'user' => $user->getId(),
+                'profil' => '1'
+            ],
+            ['created_at' => 'DESC']
+        );
+        
+        $auth = $this->security->getUser();
+
+        return $this->render('user/profil/media/pictures_profil.html.twig',[
+            'classLeftMenuProfiSelected' => '1',
+            'classSelectedMedia' => 'menuProfilSelected',
+            'user' => $user,
+            'auth' => $auth,
+            'url' => $url,
+            'mediaPicture' => $mediaPicture,
+            //'mediaButtonPicture' => 'mediaSelected'//tester utilité
+        ]);
+    }
 
     #[Route('/pictures', name: 'pictures')]
     public function picture(User $user = null): Response
@@ -248,7 +306,13 @@ class MediaController extends AbstractController
         $url = $this->getUrlPicture();
 
         $pictureRepository = $this->doctrine->getRepository(Picture::class);
-        $mediaPicture = $pictureRepository->findBy(['user' => $user->getId()], ['created_at' => 'DESC']);
+        $mediaPicture = $pictureRepository->findBy(
+            [
+                'user' => $user->getId(),
+                'profil' => null
+            ],
+            ['created_at' => 'DESC']
+        );
         
         $auth = $this->security->getUser();
 
@@ -306,7 +370,7 @@ class MediaController extends AbstractController
             $manager->flush();
                 
             $this->addFlash('success', "Votre image à bien eté telechargé");
-            return $this->redirectToRoute('media',['id' => $user->getId()]);    
+            return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "picture"]);    
         }
         return $this->render('user/profil/media/add_picture.html.twig',[
             'classLeftMenuProfiSelected' => '1',
@@ -340,9 +404,9 @@ class MediaController extends AbstractController
         if ($formUpdate->isSubmitted()) {
             if($formUpdate->isValid()) {
                 $manager = $this->doctrine->getManager();
-            $manager->flush();
-            $this->addFlash('success', "Votre image à bien eté mise a jour");
-            return $this->redirectToRoute('media',['id' => $user->getId()]);
+                $manager->flush();
+                $this->addFlash('success', "Votre image à bien eté mise a jour");
+                return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "picture"]);
             } 
         }  
             
@@ -361,15 +425,19 @@ class MediaController extends AbstractController
     #[Route('/delete-picture/{picture}', name: 'delete_picture')]
     public function deletePicture(User $user = null, Picture $picture): RedirectResponse 
     {
+        $url = $this->getUrlPicture();
         if ($picture) {
             $manager = $this->doctrine->getManager();
+        
+            $link = getcwd();
+            unlink($link . '\uploads\pictures\\' . $picture->getFilename());
             $manager->remove($picture);
             $manager->flush();
             $this->addFlash('success', "La photo a été supprimé avec succes");
         } else {
             $this->addFlash('error', "Erreur: photo inexistante");
         }
-        return $this->redirectToRoute('media',['id' => $user->getId()]); 
+        return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "picture"]); 
     }
 
     
@@ -436,7 +504,7 @@ class MediaController extends AbstractController
                 $manager->flush();
                 
                 $this->addFlash('success', "Votre video à été ajouté avec succes");
-                return $this->redirectToRoute('media',['id' => $user->getId()]);    
+                return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "video"]);    
                 
             } else {
                 $this->addFlash('error', "Une erreur est survenu lors du chargement de cette video");
@@ -477,7 +545,7 @@ class MediaController extends AbstractController
                 $manager = $this->doctrine->getManager();
             $manager->flush();
             $this->addFlash('success', "Votre video à bien eté mise a jour");
-            return $this->redirectToRoute('media',['id' => $user->getId()]);
+            return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "video"]);
             } 
         }  
             
@@ -503,7 +571,7 @@ class MediaController extends AbstractController
         } else {
             $this->addFlash('error', "Erreur: video inexistante");
         }
-        return $this->redirectToRoute('media',['id' => $user->getId()]); 
+        return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "video"]); 
     }
 
     #[Route('/musics', name: 'musics')]
@@ -574,7 +642,7 @@ class MediaController extends AbstractController
             $manager->flush();
                 
             $this->addFlash('success', "Votre musique à bien eté telechargé");
-            return $this->redirectToRoute('media',['id' => $user->getId()]);    
+            return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "music"]);    
         }
         return $this->render('user/profil/media/add_music.html.twig',[
             'classLeftMenuProfiSelected' => '1',
@@ -610,7 +678,7 @@ class MediaController extends AbstractController
                 $manager = $this->doctrine->getManager();
             $manager->flush();
             $this->addFlash('success', "Votre musique à bien eté mise a jour");
-            return $this->redirectToRoute('media',['id' => $user->getId()]);
+            return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "music"]);
             } 
         }  
             
@@ -636,145 +704,7 @@ class MediaController extends AbstractController
         } else {
             $this->addFlash('error', "Erreur: musique inexistante");
         }
-        return $this->redirectToRoute('media',['id' => $user->getId()]); 
+        return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "music"]); 
     }
 
-    
-    /*#[Route('/pictures', name: 'pictures')]
-    public function picture(User $user = null): Response
-    {
-        if (!$user) {
-            $this->addFlash('error', "Personne inconnu");
-            return $this->redirectToRoute('app_not_found');
-        }
-        $url = $this->getUrlPicture();
-
-        $pictureRepository = $this->doctrine->getRepository(Picture::class);
-        $mediaPicture = $pictureRepository->findBy(['user' => $user->getId()], ['created_at' => 'DESC']);
-        
-        $auth = $this->security->getUser();
-
-        return $this->render('user/profil/media/pictures.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
-            'classSelectedMedia' => 'menuProfilSelected',
-            'user' => $user,
-            'auth' => $auth,
-            'url' => $url,
-            'mediaPicture' => $mediaPicture,
-            //'mediaButtonPicture' => 'mediaSelected'//tester utilité
-        ]);
-    }*/
-
-    
-    /*#[Route('/videos', name: 'videos')]
-    public function video(User $user = null): Response
-    {
-        if (!$user) {
-            $this->addFlash('error', "Personne inconnu");
-            return $this->redirectToRoute('app_not_found');
-        }
-
-        $videoRepository = $this->doctrine->getRepository(Video::class);
-        $mediaVideo = $videoRepository->findBy(['user' => $user->getId()], ['created_at' => 'DESC']);
-        
-        $auth = $this->security->getUser();
-
-        return $this->render('user/profil/media/videos.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
-            'classSelectedMedia' => 'menuProfilSelected',
-            'user' => $user,
-            'auth' => $auth,
-            'mediaVideo' => $mediaVideo
-        ]);
-    }*/
-
-   /* #[Route('/musics', name: 'musics')]
-    public function music(User $user = null): Response
-    {
-        if (!$user) {
-            $this->addFlash('error', "Personne inconnu");
-            return $this->redirectToRoute('app_not_found');
-        }
-        $url = $this->getUrlMusic();
-
-        $musicRepository = $this->doctrine->getRepository(Music::class);
-        $mediaMusic = $musicRepository->findBy(['user' => $user->getId()], ['created_at' => 'DESC']);
-        
-        $auth = $this->security->getUser();
-
-        return $this->render('user/profil/media/music.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
-            'classSelectedMedia' => 'menuProfilSelected',
-            'user' => $user,
-            'auth' => $auth,
-            'url' => $url,
-            'mediaMusic' => $mediaMusic,
-            'mediaButtonMusic' => 'mediaSelected'
-        ]);
-    }*/
-
-    
-    /*#[Route('/albums', name: 'albums')]
-    public function albums(User $user = null): Response
-    {
-        if (!$user) {
-            $this->addFlash('error', "Personne inconnu");
-            return $this->redirectToRoute('app_not_found');
-        }
-        $auth = $this->security->getUser();
-    
-        $albumRepository = $this->doctrine->getRepository(Album::class);
-        $albums = $albumRepository->findBy(['user' => $user->getId()], ['created_at' => 'DESC']);
-       
-        return $this->render('user/profil/media/album.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
-            'classSelectedMedia' => 'menuProfilSelected',
-            'user' => $user,
-            'auth' => $auth,
-            'albums' =>$albums
-        ]);
-    }
-
-    
-    #[Route('/album/{albumId}', name: 'album_render')]
-    public function albumRender(User $user = null, $albumId): Response
-    {
-        if (!$user) {
-            $this->addFlash('error', "Personne inconnu");
-            return $this->redirectToRoute('app_not_found');
-        }
-        $urlPicture = $this->getUrlPicture();
-        $urlMusic = $this->getUrlMusic();
-    
-        $albumRepository = $this->doctrine->getRepository(Album::class);
-        $albumRender = $albumRepository->findBy(['id' => $albumId]);
-       
-        $pictureRepository = $this->doctrine->getRepository(Picture::class);
-        $albumPicture = $pictureRepository->findBy(['album' => $albumId], ['created_at' => 'DESC']);
-        
-        $videoRepository = $this->doctrine->getRepository(Video::class);
-        $albumVideo = $videoRepository->findBy(['album' => $albumId], ['created_at' => 'DESC']);
-
-        $musicRepository = $this->doctrine->getRepository(Music::class);
-        $albumMusic = $musicRepository->findBy(['album' => $albumId], ['created_at' => 'DESC']);
-        
-        $auth = $this->security->getUser();
-
-        return $this->render('user/profil/media/album_render.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
-            'classSelectedMedia' => 'menuProfilSelected',
-            'user' => $user,
-            'auth' => $auth,
-            'urlPicture' => $urlPicture,
-            'urlMusic' => $urlMusic,
-            //'result' => $result,
-            'album' => isset($albumRender) ? $albumRender : false,
-            'albumPicture' => isset($albumPicture) ? $albumPicture : false,
-            'albumVideo' => isset($albumVideo) ? $albumVideo : false,
-            'albumMusic' => isset($albumMusic) ? $albumMusic : false
-        ]);
-    }*/
-
-
-    
 }
