@@ -90,29 +90,29 @@ class CropperController extends AbstractController
             $picture->setLegend('crop');
             $picture->setAlt('crop');
             $picture->setProfil('1');
+            
+            //$manager->flush();
+            
             $user->addPicture($picture);
             $user->setPictureProfil($picture);
             //$user->setPictureProfil(null);    //pour enlever foto de profil et delete user 
-            $manager->persist($picture);
+            //$manager->persist($picture);
+            //$manager->flush();
+            //$manager->persist($picture);
+             $manager->persist($picture);
             $manager->persist($user);   //enregistre picture associé a un user 
+            //$manager->flush();
+           
             $manager->flush();
 
             $this->addFlash('success', "Votre image de profil à bien eté mise a jour");
             return $this->redirectToRoute('info',['id' => $user->getId()]);  
         }
 
-        /*if ($form->isSubmitted() && $form->isValid()) {
-          
-            $crop->getCroppedImage();
-
-            $crop->getCroppedThumbnail(200, 150);
-
-        
-        }*/
         $auth = $this->security->getUser();
         //return $this->redirectToRoute('info',['id' => $user->getId()]);  
         return $this->render('user/profil/cropper/index.html.twig', [
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedInfo' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,

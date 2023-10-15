@@ -1,0 +1,20 @@
+{% extends 'templateSearch.html.twig' %}
+
+{% block title %}Friend {{ user.firstname }}{% endblock %}
+
+{% block titleSearch %}
+{% endblock %}
+
+{% block Search %}
+    <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Mes amis :</h1>
+
+    {% for friend in friendResult %}
+        
+            <div class="">
+                Profil de  <a class="" href="{{ path('index', { id: friend.getFriend().id }) }}">{{ friend.getFriend().name }}</a>  {{ friend.getFriend().email }} : Ami  id : {{ friend.getFriend().id }}
+
+            </div>
+        
+        &nbsp &nbsp
+    {% endfor %} 
+{% endblock %}

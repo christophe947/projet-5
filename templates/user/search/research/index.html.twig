@@ -6,5 +6,15 @@
 {% endblock %}
 
 {% block Search %}
-    <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Rechercher des amis :</h1>
+    <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Rechercher des profils :</h1>
+
+    {% for profil in profilResult %}
+        
+            <div class="">
+                Profil de <a class="" href="{{ path('index', { id: profil.id }) }}">{{ profil.name }}</a>, demander en amis :
+                <a class="butHov color31" href="{{ path('add_friend', { friendAdd: profil.id, id: user.id }) }}{#{{ path('delete_picture', { id: user.id, picture : pictures.id }) }}#}" >ajouter</a>
+            </div>
+        
+        &nbsp &nbsp
+    {% endfor %} 
 {% endblock %}

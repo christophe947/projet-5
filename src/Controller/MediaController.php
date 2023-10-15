@@ -65,7 +65,7 @@ class MediaController extends AbstractController
         $auth = $this->security->getUser();
 
         return $this->render('user/profil/media/index.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth
@@ -85,7 +85,7 @@ class MediaController extends AbstractController
         $albums = $albumRepository->findBy(['user' => $user->getId()], ['created_at' => 'DESC']);
        
         return $this->render('user/profil/media/album.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -142,7 +142,7 @@ class MediaController extends AbstractController
         $auth = $this->security->getUser();
 
         return $this->render('user/profil/media/album_render.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -195,7 +195,7 @@ class MediaController extends AbstractController
             }
         }
         return $this->render('user/profil/media/add_album.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -286,7 +286,7 @@ class MediaController extends AbstractController
         $auth = $this->security->getUser();
 
         return $this->render('user/profil/media/pictures_profil.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -317,7 +317,7 @@ class MediaController extends AbstractController
         $auth = $this->security->getUser();
 
         return $this->render('user/profil/media/pictures.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -373,7 +373,7 @@ class MediaController extends AbstractController
             return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "picture"]);    
         }
         return $this->render('user/profil/media/add_picture.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -411,7 +411,7 @@ class MediaController extends AbstractController
         }  
             
         return $this->render('user/profil/media/update_picture.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -455,7 +455,7 @@ class MediaController extends AbstractController
         $auth = $this->security->getUser();
 
         return $this->render('user/profil/media/videos.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -512,7 +512,7 @@ class MediaController extends AbstractController
             }
         }
         return $this->render('user/profil/media/add_video.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -550,7 +550,7 @@ class MediaController extends AbstractController
         }  
             
         return $this->render('user/profil/media/update_video.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -589,7 +589,7 @@ class MediaController extends AbstractController
         $auth = $this->security->getUser();
 
         return $this->render('user/profil/media/music.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -645,7 +645,7 @@ class MediaController extends AbstractController
             return $this->redirectToRoute('media',['id' => $user->getId(), 'origin' => "music"]);    
         }
         return $this->render('user/profil/media/add_music.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,
@@ -683,7 +683,7 @@ class MediaController extends AbstractController
         }  
             
         return $this->render('user/profil/media/update_music.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedMedia' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,

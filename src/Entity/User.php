@@ -83,12 +83,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $street = null;
 
-    #[ORM\OneToOne(orphanRemoval: true)]
+    
+    #[ORM\OneToOne]
     private ?picture $picture_profil = null;
 
-    /*#[ORM\Column(nullable: true)]
-    private ?int $picture_profil = null;
-*/
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Friend::class)]
+    private Collection $friends;
+
+    
     
 
     
@@ -98,6 +100,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->picture = new ArrayCollection();
         $this->album = new ArrayCollection();
         $this->music = new ArrayCollection();
+        $this->friends = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -434,6 +437,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection<int, Friend>
+     */
+    public function getFriends(): Collection
+    {
+        return $this->friends;
+    }
+
+    public function addFriend(Friend $friend): static
+    {
+        if (!$this->friends->contains($friend)) {
+            $this->friends->add($friend);
+            $friend->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriend(Friend $friend): static
+    {
+        if ($this->friends->removeElement($friend)) {
+            // set the owning side to null (unless already changed)
+            if ($friend->getUser() === $this) {
+                $friend->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
     
+
+
+
+
+
+    
+   
+
+    
+   
 
 }

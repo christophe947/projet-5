@@ -23,7 +23,7 @@ $(function() {
         let searchParams = new URLSearchParams(window.location.search)
         searchParams.has('origin') 
         let origin = searchParams.get('origin')
-        console.log(origin);
+        //console.log(origin);
         if (origin === "picture" || origin === "album") {
             $(function (){
                 $("#pic").trigger( "click" );
@@ -51,17 +51,17 @@ $(function() {
     }        
 });
 
-
-
-//$request->query->get('foo');
-/*
-if ($(".divBtnUpload").length > 0 && origin === "video"){
-    $(function (){
-        $("#mus").trigger( "click" );
-       
-    });
- };
-*/
+$(function() {
+    if ($(".cropZone").length > 0) {
+        $(function () {
+            setTimeout(window.scrollTo({
+                top: 300,
+                left: 0,
+                behavior: "smooth",
+            }), 600);
+        });
+    }
+});
 
 variable = {
     pictureButton: document.querySelector("#pic"),

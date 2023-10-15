@@ -5,35 +5,21 @@
 {% block titleProfil %}{% endblock %}
 
 {% block Profil %}
-        {% if auth != false and user.id == auth.id %}
+    {% if auth != false and user.id == auth.id %}
             
-            {% if croppedImage is null %}
-                {{ form_start(form) }}
-                    <div class="">
-                        <div class="">{{ form_widget(form) }}</div>
-                        <div class="">
-                            <div id="cropper-preview" style="overflow: hidden;width: 200px;height: 200px;"></div>
-                        </div>
+        {% if croppedImage is null %}
+            {{ form_start(form) }}
+                <div class="crop">
+                    <div class="cropZone">
+                        {{ form_widget(form) }}
                     </div>
-                    <button type="submit" class="" style="width: 100%;">Crop it!</button>
-                {{ form_end(form) }}
-            {% else %}
-
-                {# show the cropped image after submit! 
-                <div class="">
-                    <div class="">
-                        <figure class="figure">
-                            <img src="{{ croppedImage }}" class="figure-img img-fluid rounded" alt="Cropped image">
-                            <figcaption class="figure-caption">The cropped image.</figcaption>
-                        </figure>
+                    <div id="cropFlex" class="flex justifyBetween">
+                        <div id="cropper-preview"></div>
+                        <button type="submit" id="cropIt">Crop it!</button>
                     </div>
-                    <div class="col-3">
-                        <figure class="figure">
-                            <img src="{{ croppedThumbnail }}" class="figure-img img-fluid rounded" alt="Cropped thumbnail">
-                            <figcaption class="figure-caption">A thumbnail of the cropped image.</figcaption>
-                        </figure>
-                    </div>
-                </div> #}
-            {% endif %}
+                </div>
+            {{ form_end(form) }}    
         {% endif %}
-    {% endblock %}
+    {% endif %}
+    &nbsp  &nbsp &nbsp &nbsp
+{% endblock %}

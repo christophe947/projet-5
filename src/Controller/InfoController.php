@@ -49,7 +49,7 @@ class InfoController extends AbstractController
         }
         $auth = $this->security->getUser();
         return $this->render('user/profil/info/index.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedInfo' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth
@@ -94,7 +94,7 @@ class InfoController extends AbstractController
         $auth = $this->security->getUser(); 
         
         return $this->render('user/profil/info/update_profil.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedInfo' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth,

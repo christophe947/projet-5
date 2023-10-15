@@ -10,26 +10,14 @@
     <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Photo de Profil :</h1>
 
     <div class="flex marginTop1 paddingLeft5">
-        
-        <button class="testAjax btnUpload pastille backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 fontProject fontSize2 padding1 paddingLeft1 paddingRight1 colorWhite" href="{{ path('pictures_profil', { id: user.id }) }}">
-            {#<a href="{{ path('app_cropper_util', { id: auth.id }) }}" class ="colorWhite fontProject fontSize2">#}
-                
-                    <i class="fa-solid fa-plus"></i>&nbsp Choisir une photo de profil
-                
-            {#</a>#}
+        <button class="testAjax btnUpload pastille backColorProject2 flex alignItemCenter border borderSmall borderColorProject22 borderRadius1 fontProject fontSize2 padding1 paddingLeft1 paddingRight1 colorWhite" href="{{ path('pictures_profil', { id: user.id }) }}">    
+            <i class="fa-solid fa-plus"></i>&nbsp Choisir une photo de profil
         </button>
-    
     </div>
-    <div id="ajaxDivMedia">
-            
-    </div>
+    <div id="ajaxDivMedia"></div>
 
-    <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Information :</h1>
-
-
-   
+    <h1 class="paddingLeft3 fontSize4 fontProject color1 marginBottom1">Informations :</h1>
     
-      
                     {{ form_start(form, {'attr': {'class': 'form1 flex flexColumn textAlignCenter alignItemCenter justifyCenter'}} ) }}
     
                         <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
@@ -132,12 +120,16 @@
                         <div class="error1 fontProject colorRed">
                             {{ form_errors(form.info) }}
                         </div>
-                        
-    
-    
-                        
-                        
-                        
+
+                        <div class="marginLeft-3 rowForm1 justifyCenter flex marginBottom1 alignItemCenter">
+                            <label class="fontProject color1 fontSize3">
+                                {{ form_label(form.status) }}
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            </label>
+                            {{ form_widget(form.status, {'attr': {'class': 'input1 fontSize3 padding025 textAlignCenter border borderLSmall backColorWhite borderRadius02 color31'}} ) }}
+                        </div>
+                
+                                
                         <div class="rowForm1 justifyCenter marginTop05">
                             {{ form_row(form.valider, {'attr': {'class': 'registerButton2 fontProject fontSize3 padding025 colorWhite marginBottom1 border borderLSmall borderColorProject22 borderRadius02 backColorProject2'}}) }}
                         </div>

@@ -4,11 +4,8 @@ namespace App\Entity;
 
 use App\Repository\PictureRepository;
 use App\Traits\TimeStampTrait;
-//use Doctrine\Common\Collections\ArrayCollection;
-//use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-//use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
 #[ORM\HasLifecycleCallbacks()]
@@ -25,9 +22,6 @@ class Picture
     #[ORM\Column(length: 255)]
     private ?string $filename = null;
 
-    /*#[Assert\NotBlank(
-        message: 'Veuillez renseigner ce champ'
-    )]*/
     #[ORM\Column(length: 45)]
     private ?string $legend = null;
 
@@ -42,7 +36,7 @@ class Picture
 
 
     #[ORM\ManyToOne(inversedBy: 'picture')]
-    #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')] //test permet la cascade suppression duser supprime photo associé
+    #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]   //test permet la cascade suppression duser supprime photo associé
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'picture'/*, cascade: ['persist', 'remove']*/)]  //avis : a lair de bloquer la suppression de photo possedant un album
@@ -52,7 +46,6 @@ class Picture
     #[ORM\Column(nullable: true)]
     private ?bool $profil = null;
 
-    
 
     
     public function getId(): ?int
@@ -155,7 +148,6 @@ class Picture
 
         return $this;
     }
-
    
     
 }

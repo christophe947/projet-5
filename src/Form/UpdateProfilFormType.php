@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 //use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 //use Symfony\Component\Form\Extension\Core\Type\TextAreaType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 //use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -135,7 +136,15 @@ class UpdateProfilFormType extends AbstractType
                     ])
                 ]              
             ])
-            ->add('status', HiddenType::class)
+            ->add('status', ChoiceType::class, [
+                'label' => 'Visibilitée',
+                'choices'  => [
+                    'Privée' => 1,
+                    'Publique' => 2,
+                    'Amis seulement' => 3,
+                ],
+            ])
+            //->add('status', HiddenType::class)
             //->add('created_at', HiddenType::class)
             //->add('updated_at', HiddenType::class)
             

@@ -25,7 +25,7 @@ class EventController extends AbstractController
         }
         $auth = $this->security->getUser();
         return $this->render('user/profil/event/index.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedEvent' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth

@@ -29,7 +29,7 @@
             <p><strong class="fontProject color3">Pseudo :&nbsp &nbsp</strong> {{ (user.pseudo != null) ? user.pseudo : '<em class="colorLightGrey">champ à renseigner</em>' }}</p>
             <p><strong class="fontProject color3">Email :&nbsp &nbsp</strong> {{ user.email|capitalize }}</p>
             <p><strong class="fontProject color3">Role :&nbsp &nbsp</strong> {% if (user.roles.0 == "ROLE_USER") %} Utilisateur simple {% elseif (user.roles.0 == "ROLE_ADMIN") %} Administrateur {% elseif (user.roles.0 == "ROLE_SUPER_ADMIN") %} Chef Administrateur {% endif %}</p>
-            <p><strong class="fontProject color3">Visibilité :&nbsp &nbsp</strong> {% if (user.status == 1) %} Privé {% elseif (user.status == 2 ) %} Public {% elseif (user.status == 3 ) %} Amis seulement {% endif %}</p>
+            <p><strong class="fontProject color3">Visibilité :&nbsp &nbsp</strong> {% if (user.status == 1) %} Privé {% elseif (user.status == 2 ) %} Publique {% elseif (user.status == 3 ) %} Amis seulement {% endif %}</p>
             <p><strong class="fontProject color3">Pays :&nbsp &nbsp</strong> {{ (user.country != null) ? user.country|capitalize : '<em class="colorLightGrey">champ à renseigner</em>' }}</p>
             <p><strong class="fontProject color3">Ville :&nbsp &nbsp</strong> {{ (user.city != null) ? user.city|capitalize : '<em class="colorLightGrey">champ à renseigner</em>' }}</p>
             <p><strong class="fontProject color3">Adresse :&nbsp &nbsp</strong> {{ (user.street != null) ? user.street|capitalize : '<em class="colorLightGrey">champ à renseigner</em>' }}</p> {# numberstreet is private use for localise #}

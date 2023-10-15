@@ -19,8 +19,8 @@
 
                 <ul id="leftMenu" class="fontProject flex flexColumn">
                     <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-earth-americas"></i>&nbsp &nbsp Decouvrir</a></li>
-                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-magnifying-glass"></i>&nbsp &nbsp Rechercher</a></li>
-                    <li><a href="#" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-users-line"></i>&nbsp &nbsp Mes amis</a></li>
+                    <li><a href="{{ path('research', { id: auth.id }) }}" class="alignItemBaseline flex leftMenu {% if classLeftMenuResearchSelected|default %} color3 {% else %} color4 {% endif %}"><i class="fa-solid fa-magnifying-glass"></i>&nbsp &nbsp Rechercher</a></li>
+                    <li><a href="{{ path('friends', { id: auth.id }) }}" class="alignItemBaseline flex leftMenu color4"><i class="fa-solid fa-users-line"></i>&nbsp &nbsp Mes amis</a></li>
                 </ul>
             </nav>
         </div>

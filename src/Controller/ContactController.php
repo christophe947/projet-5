@@ -25,7 +25,7 @@ class ContactController extends AbstractController
         }
         $auth = $this->security->getUser();
         return $this->render('user/profil/contact/index.html.twig',[
-            'classLeftMenuProfiSelected' => '1',
+            'classLeftMenuProfilSelected' => '1',
             'classSelectedContact' => 'menuProfilSelected',
             'user' => $user,
             'auth' => $auth
